@@ -34,40 +34,44 @@
 	<br>
 
   		<div class="row">
+
+        <!-- formulaire à remplir pour se connecter-->
   		  <div class="col-lg-6 col-sm-12 col-md-6" align = center><strong>SE CONNECTER</strong>
-          <form class="admin" method="post">
+          <form class="admin" method="post" action="loginacheteurCo.php">
               <table align=center>
                 <tr>
                   <td>Nom</td>
                 </tr>
                 <tr>
-                  <td ><input type="nom" class="login-acheteur" name="loginacheteur"></td>
+                  <td ><input type="text" class="login-acheteur" name="Nom"></td>
                 </tr>
-                <td>Prénom</td>
-                </tr>
-                <tr>
-                  <td ><input type="prenom" class="login-acheteur" name="loginacheteur"></td>
-                </tr>
-                  <td>E-mail</td>
+                <td>Email</td>
                 </tr>
                 <tr>
-                  <td ><input type="email" class="login-acheteur" name="loginacheteur"></td>
+                  <td ><input type="email" class="login-acheteur" name="Email"></td>
+                </tr>
+                  <td>Mot de passe</td>
                 </tr>
                 <tr>
-                  <td><input type="submit" value="Connection" name=""></td>
+                  <td ><input type="password" class="login-acheteur" name="Mdp"></td>
+                </tr>
+                <tr>
+                  <td><input type="submit" value="Connection" name="button1"></td>
                 </tr>
               </table>
           </form>
         </div>
+
 		    <div class="col-lg-6 col-sm-12 col-md-6" align = center><strong>CREER UN COMPTE</strong>
           <form class="admin" method="post">
             <table align=center>
               <br><br><br>
               <tr>
-                <td><input type="submit" value="Cliquez ici pour vous créer un compte" name=""></td>
+                <td><a class="nav-link" href="loginacheteur2.html"><input type="button" value="Cliquez ici pour vous créer un compte" name="button"></a></td>
             </table>
           </form>
-        </div>         
+        </div>
+
 	    </div>
 
 
