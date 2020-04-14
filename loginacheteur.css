@@ -1,0 +1,87 @@
+.navbar { background:#EEF3F1; /*couleur légèrement grise*/
+		}
+
+		.nav-link{
+  			font-size: 15px;
+			color: #7EC6A3; /*couleur bleu canard*/
+			cursor: pointer;
+			text-decoration: underline;
+			margin-right: 5em !important; 
+			margin-left: 10em ;}
+
+		.nav-link:hover {
+    		color: black;
+        }
+
+/*titre des 2 colonnes*/
+.col-lg-6 {
+	text-align: center; 
+	color: #1F7955;
+	border-right: 2px solid #18AB9C;
+}
+
+h4{
+	text-align: center;
+	margin: 3em auto;
+}
+h5{
+	text-align: center;
+	margin: 3em auto;
+}
+h6{
+	text-align: center;
+	margin: 3em auto;
+}
+form{
+	margin: 4em auto;
+	text-align: left;
+	color: black;
+   
+}
+.login-acheteur{
+	border: 1px solid grey;
+	padding:7px;
+	transition: all 0.5s ease;
+}
+.admin input{
+	display: block;
+	margin-bottom: 6px;
+	border-radius: 5px;
+}
+
+.login-acheteur:hover{
+	background-color: #7EC6A3;
+	color:white;
+}
+.coord-acheteur:hover{
+	background-color: #7EC6A3;
+	color:white;
+}
+.admin input[type=button]{
+	background-color: #7EC6A3;
+	padding: 5px; 
+	color: white;
+	transition: all 0.5s ease;
+}
+.admin input[type=button]:hover{
+	background-color: white;
+	color: #7EC6A3;
+	transition: all 0.5s ease;
+}
+
+.admin input[type=submit]{
+	background-color: #7EC6A3;
+	padding: 5px; 
+	color: white;
+	transition: all 0.5s ease;
+}
+.admin input[type=submit]:hover{
+	background-color: white;
+	color: #7EC6A3;
+	transition: all 0.5s ease;
+}
+
+.creation {
+	padding-left: 200px;
+	font-size: 20px;
+}
