@@ -30,7 +30,7 @@ if($_POST["button3"]){
    
     if (mysqli_num_rows($result) != 0){
     echo "Ces coordonnées correspondent déjà à un compte vous avez surement fait une erreur !";
-    header('Location:loginacheteur3.html');
+    header('Location:loginacheteur3.php');
     } 
     else{
     $sql = "INSERT INTO coord(Adresse, Ville, CP, Pays, Email, Telephone) VALUES('$adresse', '$ville', '$cp', '$pays', '$email', '$telephone')";
@@ -39,7 +39,7 @@ if($_POST["button3"]){
     //vérification de la création de compte
     echo "Félicitations ! Vos coordonnées ont bien été enregistrées !";
     //diréction vers la prochaine page html (page d'accueil achats)
-    header('Location:achat.html');
+    header('Location:achat.php');
     }
     }
 

@@ -1,3 +1,4 @@
+/*Barre de navigation avant login*/
 .navbar { background:#EEF3F1; /*couleur légèrement grise*/
 		}
 
@@ -12,6 +13,24 @@
 		.nav-link:hover {
     		color: black;
         }
+
+/* Barre de navigation après login */
+.navbar { background:#EEF3F1; /*couleur légèrement grise*/
+		}
+
+		.nav-link2{
+  			font-size: 15px;
+			color: #7EC6A3; /*couleur bleu canard*/
+			cursor: pointer;
+			text-decoration: underline;
+			margin-right: 3em !important; 
+			margin-left: 4em ;}
+
+		.nav-link2:hover {
+    		color: black;
+        }
+
+
 
 /*titre des 2 colonnes*/
 .col-lg-6 {
@@ -105,7 +124,4 @@ body, html{height:100%;}
 footer{
 	background: #E8EEEC;
 	padding: 20px 0 20px; 
-	/*position:absolute;
-	bottom:0;*/
-	/*width:100%;*/
 }

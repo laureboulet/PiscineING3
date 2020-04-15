@@ -1,10 +1,10 @@
 <?php
 
 //Récupérer les données du formulaire
-$nom = isset($_POST["Nom"]) ? $_POST["Nom"] : "";
-$prenom = isset($_POST["Prenom"]) ? $_POST["Prenom"] : "";
-$email = isset($_POST["Email"]) ? $_POST["Email"] : "";
-$mdp = isset($_POST["Mdp"]) ? $_POST["Mdp"] : "";
+$nom = isset($_POST["Nomach"]) ? $_POST["Nomach"] : "";
+$prenom = isset($_POST["Prenomach"]) ? $_POST["Prenomach"] : "";
+$email = isset($_POST["Emailach"]) ? $_POST["Emailach"] : "";
+$mdp = isset($_POST["Mdpach"]) ? $_POST["Mdpach"] : "";
 
 //identification de la base de données
 $database = "piscineweb";
@@ -16,9 +16,9 @@ if($_POST["button2"]){
     if($db_found){
         $sql = "SELECT * FROM acheteur";
         if($email != "") {
-            $sql .= " WHERE Email LIKE '%$email%'";
+            $sql .= " WHERE Emailach LIKE '%$email%'";
             if($mdp != ""){
-                $sql .= " AND Mdp LIKE '%$mdp%'";
+                $sql .= " AND Mdpach LIKE '%$mdp%'";
 
             }
         }
@@ -26,14 +26,14 @@ if($_POST["button2"]){
    
     if (mysqli_num_rows($result) != 0){
     echo "Vous avez déjà créé un compte. Connectez-vous directement sur notre site !";
-    header('Location:loginacheteur3.html');
+    header('Location:loginacheteur.php');
     }
     else{
-        $sql = "INSERT INTO acheteur(Nom, Prenom, Email, Mdp) VALUES('$nom', '$prenom', '$email', '$mdp')";
+        $sql = "INSERT INTO acheteur(Nomach, Prenomach, Emailach, Mdpach) VALUES('$nom', '$prenom', '$email', '$mdp')";
     $result = mysqli_query($db_handle, $sql);
 
     echo "Félicitations ! Votre compte a été crée !";
-    header('Location:loginacheteur3.html');
+    header('Location:loginacheteur3.php');
 
     }
 
