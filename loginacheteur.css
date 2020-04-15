@@ -22,7 +22,6 @@
 
 h4{
 	text-align: center;
-	margin: 3em auto;
 }
 h5{
 	text-align: center;
@@ -84,4 +83,29 @@ form{
 .creation {
 	padding-left: 200px;
 	font-size: 20px;
+}
+
+/*bas de la page*/
+.link{
+	color: #7EC6A3;
+}
+
+.link:hover{
+	color: black;
+}
+.info{
+	color: black;
+}
+.info:hover{
+	color: #7EC6A3;
+}
+
+body, html{height:100%;}
+
+footer{
+	background: #E8EEEC;
+	padding: 20px 0 20px; 
+	/*position:absolute;
+	bottom:0;*/
+	/*width:100%;*/
 }
