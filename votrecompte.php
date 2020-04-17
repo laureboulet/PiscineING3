@@ -58,56 +58,51 @@ echo $_SESSION['prenomach'];
 ?>,
   vous êtes sur votre espace personnel </h3>
  <br><br>
-<p> Vous pouvez modifier vos informations personnelles à tout moment en cliquant sur "Modifier" en bas de page. </p>
+<p style="color:  #457A68"><I> Vous pouvez modifier vos informations personnelles à tout moment en cliquant sur "Modifier" en bas de page. </I></p>
 
 
 <!-- Affichage des informations personnelles dans un formulaire qu'on ne peut pas modifier -->
-<form class="admin" method="post" >
+
+
+<form>
 	<fieldset disabled>
-      <table>
-        <tr>
-          <td class="creation">Nom (pour la livraison)</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Nomlivr"  value="<?php echo $_SESSION['nomlivr'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Prénom (pour la livraison)</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Prenomlivr" value="<?php echo $_SESSION['prenomlivr'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Adresse</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Adresse" value="<?php echo $_SESSION['adresseach'];?>"></td>
-        </tr>
-        <td class="creation">Ville</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Ville" value="<?php echo $_SESSION['villeach'];?>"></td>
-        </tr>
-          <td class="creation">Code Postal</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="number" class="coord-acheteur" name="CP" value="<?php echo $_SESSION['cpach'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Pays</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Pays" value="<?php echo $_SESSION['paysach'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Telephone</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="number" class="coord-acheteur" name="Telephone" value="<?php echo $_SESSION['telephoneach'];?>"></td>
-	</table>
-</fieldset>
-<button type="button" class="btn creation" data-toggle="modal" data-target="#exampleModal" >Modifier</button></td>
+  <div class="form-row" style="padding-left: 17px;">
+    <div class="form-group col-md-4 ">
+      <label for="inputEmail4">Nom (pour la livraison)</label>
+      <input type="text" class="form-control" id="Nomlivr"  value="<?php echo $_SESSION['nomlivr'];?>">
+    </div>
+    <div class="form-group col-md-4  ">
+      <label for="inputPassword4">Prénom (pour la livraison)</label>
+      <input type="text" class="form-control" id="Prenomlivr"  value="<?php echo $_SESSION['prenomlivr'];?>">
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputAddress">Addresse</label>
+    <input type="text" class="form-control" id="Addresse" value="<?php echo $_SESSION['adresseach'];?>">
+  </div>
+  <div class="form-group col-md-3">
+    <label for="inputAddress2">Ville</label>
+    <input type="text" class="form-control" id="Ville" value="<?php echo $_SESSION['villeach'];?>">
+  </div>
+  <div class="form-row" style="padding-left: 17px;">
+    <div class="form-group col-md-3">
+      <label for="inputCity">Code Postal</label>
+      <input type="number" class="form-control" id="CP" value="<?php echo $_SESSION['cpach'];?>">
+    </div>
+    <div class="form-group col-md-4 ">
+      <label for="inputState">Pays</label>
+      <input type="text" class="form-control" id="Pays" value="<?php echo $_SESSION['paysach'];?>">
+    </div>
+  </div>
+  <div class="form-group col-md-4  ">
+      <label for="inputState">Telephone</label>
+      <input type="number" class="form-control" id="Telephone" value="<?php echo $_SESSION['telephoneach'];?>">
+  </div>
+  </fieldset>
+  <button type="button" class="btn creation" data-toggle="modal" data-target="#exampleModal" >Modifier</button></td>
+
 </form>
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,53 +114,46 @@ echo $_SESSION['prenomach'];
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="compte" method="post" action="modification.php">
+      <form method="post" action="modification.php">
       <div class="modal-body">
-<p> Changez les champs souhaités </p>
+<p> Changez les champs souhaités </p> <br><br>
 
+
+		  <div class="form-row" style="padding-left: 17px;">
+		    <div class="form-group col-md-4 ">
+		      <label for="inputEmail4">Nom (livraison)</label>
+		      <input type="text" class="form-control" name="Nomlivr"  value="<?php echo $_SESSION['nomlivr'];?>">
+		    </div>
+		    <div class="form-group col-md-4  ">
+		      <label for="inputPassword4">Prénom (livraison)</label>
+		      <input type="text" class="form-control" name="Prenomlivr"  value="<?php echo $_SESSION['prenomlivr'];?>">
+		    </div>
+		  </div>
+		  <div class="form-row" style="padding-left: 17px;">
+		  <div class="form-group col-md-6">
+		    <label for="inputAddress">Addresse</label>
+		    <input type="text" class="form-control" name="Adresse" value="<?php echo $_SESSION['adresseach'];?>">
+		  </div>
+		  <div class="form-group col-md-3">
+		    <label for="inputAddress2">Ville</label>
+		    <input type="text" class="form-control" name="Ville" value="<?php echo $_SESSION['villeach'];?>">
+		  </div>
+		</div>
+		  <div class="form-row" style="padding-left: 17px;">
+		    <div class="form-group col-md-3">
+		      <label for="inputCity">Code Postal</label>
+		      <input type="number" class="form-control" name="CP" value="<?php echo $_SESSION['cpach'];?>">
+		    </div>
+		    <div class="form-group col-md-4 ">
+		      <label for="inputState">Pays</label>
+		      <input type="text" class="form-control" name="Pays" value="<?php echo $_SESSION['paysach'];?>">
+		    </div>
+		    <div class="form-group col-md-4  ">
+		      <label for="inputState">Telephone</label>
+		      <input type="number" class="form-control" name="Telephone" value="<?php echo $_SESSION['telephoneach'];?>">
+		  </div>
+		  </div>
 	
-      <table>
-        <tr>
-          <td class="creation">Nom (pour la livraison)</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Nomlivr"  value="<?php echo $_SESSION['nomlivr'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Prénom (pour la livraison)</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Prenomlivr" value="<?php echo $_SESSION['prenomlivr'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Adresse</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Adresse" value="<?php echo $_SESSION['adresseach'];?>"></td>
-        </tr>
-        <td class="creation">Ville</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Ville" value="<?php echo $_SESSION['villeach'];?>"></td>
-        </tr>
-          <td class="creation">Code Postal</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="number" class="coord-acheteur" name="CP" value="<?php echo $_SESSION['cpach'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Pays</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="text" class="coord-acheteur" name="Pays" value="<?php echo $_SESSION['paysach'];?>"></td>
-        </tr>
-        <tr>
-          <td class="creation">Telephone</td>
-        </tr>
-        <tr>
-          <td class="creation"><input  type="number" class="coord-acheteur" name="Telephone" value="<?php echo $_SESSION['telephoneach'];?>"></td>
-        </tr>
-	</table>
 
 
       </div>
