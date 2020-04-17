@@ -25,10 +25,9 @@ if($_POST["vendreItem2"]){
             //session_start();
             //$etranger = $_SESSION['Idvend'];
             while ($data = mysqli_fetch_assoc($result)) {
-            	$Nomitem=$data['Nomitem'];
+            	$id=$data['Iditem'];
             	}
-            $sql = "DELETE FROM item" 
-            $sql .= "WHERE Nomitem= $Nomitem";
+            $sql = "DELETE FROM item WHERE Iditem= $id";
             $result = mysqli_query($db_handle, $sql);
 
      	//$item = true;
