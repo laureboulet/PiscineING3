@@ -39,9 +39,78 @@ if($_POST["button1"]){
 				session_start();
 				//on récupère la clé primaire de acheteur à savoir l'email
 				$_SESSION['emailach']=$email;
+				$_SESSION['nomach']=$nom;
+				$_SESSION['mdpach']=$mdp;
+				//on récupère des informations de la table pour les stocker dans nnotre session
 
-                echo "Vous êtes connecté !" ;
-                header('Location:achat.php');
+				//prénom
+				$recupPre="SELECT Prenomach FROM acheteur WHERE Emailach='$email' AND Mdpach = '$mdp'";
+				$result2=mysqli_query($db_handle, $recupPre);
+				$row=mysqli_fetch_array($result2);
+				$prenom=$row['Prenomach'];
+				$_SESSION['prenomach']=$prenom;
+
+				//id
+				$recupId="SELECT Idach FROM acheteur WHERE Emailach='$email' AND Mdpach = '$mdp'";
+				$result3=mysqli_query($db_handle, $recupId);
+				$row=mysqli_fetch_array($result3);
+				$id=$row['Idach'];
+				$_SESSION['idach']=$id;
+
+
+//on récupère les informations de la session correspondant à la personne qui vient de se connecter (ses coordonnées)
+
+				//adresse
+				$recupAd="SELECT Adresse FROM coord WHERE Ach=$id";
+				$result5=mysqli_query($db_handle, $recupAd);
+				$row=mysqli_fetch_array($result5);
+				$adresseach=$row['Adresse'];
+				$_SESSION['adresseach']=$adresseach; 
+
+				//Ville
+				$recupVille="SELECT Ville FROM coord WHERE Ach=$id";
+				$result6=mysqli_query($db_handle, $recupVille);
+				$row=mysqli_fetch_array($result6);
+				$villeach=$row['Ville'];
+				$_SESSION['villeach']=$villeach; 
+
+				//Cp
+				$recupCp="SELECT CP FROM coord WHERE Ach=$id";
+				$result7=mysqli_query($db_handle, $recupCp);
+				$row=mysqli_fetch_array($result7);
+				$cp=$row['CP'];
+				$_SESSION['cpach']=$cp; 
+
+				//Pays
+				$recupPays="SELECT Pays FROM coord WHERE Ach=$id";
+				$result8=mysqli_query($db_handle, $recupPays);
+				$row=mysqli_fetch_array($result8);
+				$pays=$row['Pays'];
+				$_SESSION['paysach']=$pays; 
+
+				//Telephone
+				$recupTel="SELECT Telephone FROM coord WHERE Ach=$id";
+				$result9=mysqli_query($db_handle, $recupTel);
+				$row=mysqli_fetch_array($result9);
+				$telephone=$row['Telephone'];
+				$_SESSION['telephoneach']=$telephone; 
+
+				//Nomlivr
+				$recupNomlivr="SELECT Nomlivr FROM coord WHERE Ach=$id";
+				$result10=mysqli_query($db_handle, $recupNomlivr);
+				$row=mysqli_fetch_array($result10);
+				$nomlivr=$row['Nomlivr'];
+				$_SESSION['nomlivr']=$nomlivr; 
+
+				//Prenomlivr
+				$recupPrelivr="SELECT Prenomlivr FROM coord WHERE Ach=$id";
+				$result11=mysqli_query($db_handle, $recupPrelivr);
+				$row=mysqli_fetch_array($result11);
+				$prenomlivr=$row['Prenomlivr'];
+				$_SESSION['prenomlivr']=$prenomlivr; 
+
+                echo "<script>alert(\"Vous êtes connectés !\")</script>";
+                header('Location:votrecompte.php');
             }
         }
             

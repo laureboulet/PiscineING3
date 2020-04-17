@@ -39,6 +39,7 @@
 	border-right: 2px solid #18AB9C;
 }
 
+
 h4{
 	text-align: center;
 }
@@ -124,4 +125,16 @@ body, html{height:100%;}
 footer{
 	background: #E8EEEC;
 	padding: 20px 0 20px; 
+}
+
+.btn {
+	color: white;
+	background-color: #7EC6A3;
+	padding: 5px; 
+	/*transition: all 0.5s ease;*/
+} 
+.btn:hover {
+	background-color: white;
+	color: #7EC6A3;
+	/*transition: all 0.5s ease;*/
 }
