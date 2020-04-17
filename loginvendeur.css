@@ -1,0 +1,92 @@
+	.navbar { background:#EEF3F1; /*couleur légèrement grise*/
+			}
+	.nav-link{
+	  			font-size: 15px;
+				color: #7EC6A3; /*couleur bleu canard*/
+				cursor: pointer;
+				text-decoration: underline;
+				margin-right: 5em !important; 
+				margin-left: 10em ;}
+
+			.nav-link:hover {
+	    		color: black;
+	        }
+
+			/*Messages d'accueil*/
+			.bienvenue h5{
+				margin-top: 25px;
+			}
+        /*Messages d'accueil*/
+        .bienvenue h5{
+            margin-top: 25px;
+        }
+
+		/*Introduction aux formulaires*/
+		.choixdeco{
+			margin-bottom: -50px;
+			font-size: 18px;
+			color : #1F7955;
+			margin-top: 50px;
+			text-align: center;	
+		}
+
+		/*Barre de séparation verticale*/
+		.col-lg-6{
+			border-right: 2px solid #1F7955;
+		}
+
+		/*Champs des formulaires (connexion+création)*/
+		.champs{
+			font-size: 20px;
+		}
+
+		/*Mise en forme des champs du formulaire + bouton*/
+		.login-vendeur{
+	border: 1px solid grey;
+	padding:7px;
+	transition: all 0.5s ease;
+	}
+.vendeur input{
+	display: block;
+	margin-bottom: 6px;
+	border-radius: 5px;
+}
+
+.login-vendeur:hover{
+	background-color: #7EC6A3;
+	color:white;
+}
+.vendeur input[type=submit]{
+	background-color: #7EC6A3;
+	padding: 5px; 
+	color: white;
+	transition: all 0.5s ease;
+}
+.vendeur input[type=submit]:hover{
+	background-color: white;
+	color: #7EC6A3;
+	transition: all 0.5s ease;
+}
+
+.link{
+	color: #7EC6A3;
+}
+
+.link:hover{
+	color: black;
+}
+.info{
+	color: black;
+}
+.info:hover{
+	color: #7EC6A3;
+}
+
+/*body, html{height:100%;}*/
+
+footer{
+	background: #E8EEEC;
+	padding: 20px 0 20px; 
+
+}
+
