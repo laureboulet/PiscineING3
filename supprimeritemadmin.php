@@ -42,9 +42,6 @@
     <div class="row"> 
       <div class="col-lg-3">
         <div class="list-group" style="padding-top: 30px">
-          <a href="#" class="list-group-item">Ferraille ou Trésor</a>
-          <a href="#" class="list-group-item">Bon pour le Musée</a>
-          <a href="#" class="list-group-item">Accessoire VIP</a><br>
           <form method="post" action="supprimeritemadmin.php" class="item">
               <p>Quel article voulez-vous supprimer ? <br>Veuillez-nous indiquer votre choix en écrivant son nom</p>
               <input type="text" name="nomitem">
@@ -124,8 +121,8 @@
               <a href="#"><?php echo "<img class='card-img-top' src='$image'>"; ?></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#"> <?php echo $data['Nomitem']; ?></a>
-                  <a href="#">Item <?php echo $data['Iditem']; ?></a>
+                  <a href="#" style="font-size: 20px; color:#7EC6A3"> <?php echo $data['Nomitem']; ?></a><br>
+                  <a href="#" style="font-size: 15px; color:#7EC6A3">Item <?php echo $data['Iditem']; ?></a>
                 </h4>
                 <h5><?php echo $data['Prixitem'];?>€</h5>
                 <p class="card-text"><?php echo $data['Description']; ?></p>
