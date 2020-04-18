@@ -175,7 +175,7 @@ echo $_SESSION['prenomach'];
 
 <!-- Affichage de la carte actuellement enrgistrée -->
 
- <form method="post" action="ajoutercarte.php">
+ <form method="post" action="modifiercarte.php">
  	<fieldset disabled>
  	 <div class="form-group col-md-6 ">
           <label for="inputEmail4">Nom du titulaire</label>
@@ -183,7 +183,7 @@ echo $_SESSION['prenomach'];
         </div>
         <div class="form-group col-md-6  ">
           <label for="inputPassword4">Numéro de carte</label>
-          <input type="number" class="form-control" name="Numero" value="<?php echo $_SESSION['numerocb'];?>">
+          <input type="number" class="form-control" name="Numero" placeholder="<?php $num=substr_replace( $_SESSION['numerocb'], 'XXXXXXXXXXXXXX',4,  12); echo $num; ?>">
         </div>
         <div class ="form-group col-md-6">
           <label for="Type carte" > Type de carte</label>
@@ -197,18 +197,19 @@ echo $_SESSION['prenomach'];
       </div>
       <div class="form-group col-md-4">
         <label for="inputAddress2">Cryptogramme</label>
-        <input type="number" class="form-control" name="Cryptogramme"  value="<?php echo $_SESSION['crypto'];?>">
+        <input type="number" class="form-control" name="Cryptogramme"  placeholder="XXX">
       </div>
     </div>
 </fieldset>
+<button type="button" class="btn creation" data-toggle="modal" data-target="#modifcarte" >Modifier les informations concernant cette carte</button></td>
 </form>
 
-<button type="button" class="btn creation" data-toggle="modal" data-target="#exampleModal" >Entrer une nouvelle carte</button></td>
+
 
 <!-- changer de carte -->
 
     
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modifcarte" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -217,20 +218,20 @@ echo $_SESSION['prenomach'];
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="ajoutercarte.php">
+      <form method="post" action="modifiercarte.php">
       <div class="modal-body">
 
         <div class="form-group col-md-6 ">
           <label for="inputEmail4">Nom du titulaire</label>
-          <input type="text" class="form-control" name="Nomtitulaire"  placeholder="Marie Dupond">
+          <input type="text" class="form-control" name="Nomtitulaire" value="<?php echo $_SESSION['nomtitulaire'];?>">
         </div>
         <div class="form-group col-md-6  ">
           <label for="inputPassword4">Numéro de carte</label>
-          <input type="number" class="form-control" name="Numero">
+          <input type="number" class="form-control" name="Numero" placeholder="<?php $num=substr_replace( $_SESSION['numerocb'], 'XXXXXXXXXXXXXX',4,  12); echo $num; ?>">
         </div>
         <div class ="form-group col-md-6">
           <label for="Type carte" > Selectionnez un type de carte</label>
-          <select class="form control" name="Type" >
+          <select required ="required" class="form control" name="Type" value="<?php echo $_SESSION['typecb'];?>">
             <option value="Visa">Visa</option>
             <option value="MasterCard"> Master Card</option>
             <option value="Amex">American Express</option>
@@ -238,14 +239,14 @@ echo $_SESSION['prenomach'];
           </select>
         </div>
       
-      <div class="form-row" style="padding-left: 17px;">
+       <div class="form-row" style="padding-left: 17px;">
       <div class="form-group col-md-4">
         <label for="inputAddress">Date d'expiration</label>
-        <input type="text" class="form-control" name="Date_expiration" placeholder="MM/AA">
+        <input type="text" class="form-control" name="Date_expiration"  value="<?php echo $_SESSION['date_expiration'];?>">
       </div>
       <div class="form-group col-md-4">
         <label for="inputAddress2">Cryptogramme</label>
-        <input type="number" class="form-control" name="Cryptogramme" placeholder="XXX">
+        <input type="number" class="form-control" name="Cryptogramme"  placeholder="XXX">
       </div>
     </div>
 
