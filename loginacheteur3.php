@@ -33,6 +33,18 @@
     <form class="admin" method="post" action="ajoutercoordonnees.php" >
       <table>
         <tr>
+          <td class="creation">Nom (pour la livraison)</td>
+        </tr>
+        <tr>
+          <td class="creation"><input required="required" type="text" class="coord-acheteur" name="Nomlivr"></td>
+        </tr>
+        <tr>
+          <td class="creation">Prénom (pour la livraison)</td>
+        </tr>
+        <tr>
+          <td class="creation"><input required="required" type="text" class="coord-acheteur" name="Prenomlivr"></td>
+        </tr>
+        <tr>
           <td class="creation">Adresse</td>
         </tr>
         <tr>
@@ -53,12 +65,6 @@
         </tr>
         <tr>
           <td class="creation"><input required="required" type="text" class="coord-acheteur" name="Pays"></td>
-        </tr>
-        <tr>
-          <td class="creation">Email</td>
-        </tr>
-        <tr>
-          <td class="creation"><input required="required" type="email" class="coord-acheteur" name="Email"></td>
         </tr>
         <tr>
           <td class="creation">Telephone</td>

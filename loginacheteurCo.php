@@ -42,6 +42,7 @@ if($_POST["button1"]){
 				$_SESSION['nomach']=$nom;
 				$_SESSION['mdpach']=$mdp;
 				//on récupère des informations de la table pour les stocker dans nnotre session
+				
 
 				//prénom
 				$recupPre="SELECT Prenomach FROM acheteur WHERE Emailach='$email' AND Mdpach = '$mdp'";
@@ -60,12 +61,14 @@ if($_POST["button1"]){
 
 //on récupère les informations de la session correspondant à la personne qui vient de se connecter (ses coordonnées)
 
+
 				//adresse
 				$recupAd="SELECT Adresse FROM coord WHERE Ach=$id";
 				$result5=mysqli_query($db_handle, $recupAd);
 				$row=mysqli_fetch_array($result5);
 				$adresseach=$row['Adresse'];
 				$_SESSION['adresseach']=$adresseach; 
+				
 
 				//Ville
 				$recupVille="SELECT Ville FROM coord WHERE Ach=$id";
@@ -109,8 +112,58 @@ if($_POST["button1"]){
 				$prenomlivr=$row['Prenomlivr'];
 				$_SESSION['prenomlivr']=$prenomlivr; 
 
+// on récupère les données bancaires de la carte si elle existe 
+				$carte="SELECT Numero FROM carte WHERE ACh=$id";
+				$result = mysqli_query($db_handle, $carte);
+
+       			 if (mysqli_num_rows($result)==0){
+					$_SESSION['nomtitulaire']=NULL;
+				    $_SESSION['date_expiration']=NULL;
+				    $_SESSION['numerocb']=NULL;
+				    $_SESSION['crypto']=NULL;
+				    $_SESSION['typecb']=NULL;
+
+				    $solde= rand(100,10000);
+
+				    $creation="INSERT INTO carte (Numero, Date_expiration, Cryptogramme, Nomtitulaire, Solde, Type, ACh) VALUES (0000000000000000, 'MM/AA', 000, 'Nom', $solde, 'Type', $id ";
+
+
+				}
+				else{
+
+					//Nomtitulaire
+				$recupNomtit="SELECT Nomtitulaire FROM carte WHERE Ach=$id";
+				$result12=mysqli_query($db_handle, $recupNomtit);
+				$row=mysqli_fetch_array($result12);
+				$nomtit=$row['Nomtitulaire'];
+				$_SESSION['nomtitulaire']=$nomtit;
+
+				$recupAll="SELECT * FROM carte WHERE  Ach=$id";
+				if($result=mysqli_query($db_handle, $recupAll)){
+                        $stack = array();
+                        while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+                            $stack = (
+                                $row
+                            );      
+                        }
+       					$_SESSION['date_expiration']=$stack['Date_expiration'];
+       					$_SESSION['numerocb']=$stack['Numero'];
+       					$_SESSION['crypto']=$stack['Cryptogramme'];
+       					$_SESSION['typecb']=$stack['Type'];
+				}else{
+					$json =  @json_encode("aille");
+        			print "<script>console.log($json);</script>";
+				}
+
+			
+
+				}
+
+					$json =  @json_encode($_SESSION);
+        			print "<script>console.log($json);</script>";
+
                 echo "<script>alert(\"Vous êtes connectés !\")</script>";
-                header('Location:votrecompte.php');
+               header('Location:votrecompte.php');
             }
         }
             
