@@ -58,7 +58,7 @@ echo $_SESSION['prenomach'];
 ?>,
   vous êtes sur votre espace personnel </h3>
  <br><br>
-<p style="color:  #457A68"><I> Vous pouvez modifier vos informations personnelles à tout moment en cliquant sur "Modifier" en bas de page. </I></p>
+<p style="color:  #457A68"><I> Vous pouvez modifier vos informations personnelles et bancaires à tout moment en cliquant sur "Modifier" en bas de page. </I></p>
 
 
 <!-- Affichage des informations personnelles dans un formulaire qu'on ne peut pas modifier -->
@@ -99,7 +99,7 @@ echo $_SESSION['prenomach'];
       <input type="number" class="form-control" id="Telephone" value="<?php echo $_SESSION['telephoneach'];?>">
   </div>
   </fieldset>
-  <button type="button" class="btn creation" data-toggle="modal" data-target="#exampleModal" >Modifier</button></td>
+  <button type="button" class="btn creation" data-toggle="modal" data-target="#exampleModal" >Modifier les coordonnées de livraison</button></td>
 
 </form>
 
@@ -153,7 +153,7 @@ echo $_SESSION['prenomach'];
 		      <input type="number" class="form-control" name="Telephone" value="<?php echo $_SESSION['telephoneach'];?>">
 		  </div>
 		  </div>
-	
+	<br> <br> <br>
 
 
       </div>
@@ -165,6 +165,100 @@ echo $_SESSION['prenomach'];
     </div>
   </div>
 </div>
+
+
+
+
+
+<!-- les coordonnées bancaires -->
+
+
+<!-- Affichage de la carte actuellement enrgistrée -->
+
+ <form method="post" action="ajoutercarte.php">
+ 	<fieldset disabled>
+ 	 <div class="form-group col-md-6 ">
+          <label for="inputEmail4">Nom du titulaire</label>
+          <input type="text" class="form-control" name="Nomtitulaire" value="<?php echo $_SESSION['nomtitulaire'];?>">
+        </div>
+        <div class="form-group col-md-6  ">
+          <label for="inputPassword4">Numéro de carte</label>
+          <input type="number" class="form-control" name="Numero" value="<?php echo $_SESSION['numerocb'];?>">
+        </div>
+        <div class ="form-group col-md-6">
+          <label for="Type carte" > Type de carte</label>
+          <input type="text" class="form control" name="Type" value="<?php echo $_SESSION['typecb'];?>">
+        </div>
+      
+      <div class="form-row" style="padding-left: 17px;">
+      <div class="form-group col-md-4">
+        <label for="inputAddress">Date d'expiration</label>
+        <input type="text" class="form-control" name="Date_expiration"  value="<?php echo $_SESSION['date_expiration'];?>">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputAddress2">Cryptogramme</label>
+        <input type="number" class="form-control" name="Cryptogramme"  value="<?php echo $_SESSION['crypto'];?>">
+      </div>
+    </div>
+</fieldset>
+</form>
+
+<button type="button" class="btn creation" data-toggle="modal" data-target="#exampleModal" >Entrer une nouvelle carte</button></td>
+
+<!-- changer de carte -->
+
+    
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Veuillez entrer vos coordonnées bancaires</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="ajoutercarte.php">
+      <div class="modal-body">
+
+        <div class="form-group col-md-6 ">
+          <label for="inputEmail4">Nom du titulaire</label>
+          <input type="text" class="form-control" name="Nomtitulaire"  placeholder="Marie Dupond">
+        </div>
+        <div class="form-group col-md-6  ">
+          <label for="inputPassword4">Numéro de carte</label>
+          <input type="number" class="form-control" name="Numero">
+        </div>
+        <div class ="form-group col-md-6">
+          <label for="Type carte" > Selectionnez un type de carte</label>
+          <select class="form control" name="Type" >
+            <option value="Visa">Visa</option>
+            <option value="MasterCard"> Master Card</option>
+            <option value="Amex">American Express</option>
+            <option value="Paypal">PayPal</option>
+          </select>
+        </div>
+      
+      <div class="form-row" style="padding-left: 17px;">
+      <div class="form-group col-md-4">
+        <label for="inputAddress">Date d'expiration</label>
+        <input type="text" class="form-control" name="Date_expiration" placeholder="MM/AA">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputAddress2">Cryptogramme</label>
+        <input type="number" class="form-control" name="Cryptogramme" placeholder="XXX">
+      </div>
+    </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn_2 btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn " name="button5">Enregistrer les modifications</button>
+      </div> 
+    </form>
+    </div>
+  </div>
+</div>
+
 
 <!-- Pied de page-->
 <footer class="page-footer text-center"> 
