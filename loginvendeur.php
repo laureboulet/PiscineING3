@@ -62,18 +62,18 @@ $db_found = mysqli_select_db($db_handle, $database);
 			<h3 class="choixdeco">Se connecter en tant que vendeur</h3>
 			<div align="center">
 			<?php
-			$pseudovend = isset($_POST["pseudo"]) ? $_POST["pseudo"] : "";
-			$emailvend = isset($_POST["email"]) ? $_POST["email"] : "";
-			$mdpvend = isset($_POST["mdp"]) ? $_POST["mdp"] : "";
+			$Pseudovend = isset($_POST["Pseudovend"]) ? $_POST["Pseudovend"] : "";
+			$Emailvend = isset($_POST["Emailvend"]) ? $_POST["Emailvend"] : "";
+			$Mdpvend = isset($_POST["Mdpvend"]) ? $_POST["Mdpvend"] : "";
 			if(isset($_POST["button1"])){
     			if($db_found){
 	        		$sql = "SELECT * FROM vendeur";
-	        		if($pseudovend != "") {
-			            $sql .= " WHERE Pseudovend LIKE '%$pseudovend%'";
-			            if($emailvend != ""){
-			                $sql .= " AND Emailvend LIKE '%$emailvend%'";
-			                if($mdpvend != ""){
-			                    $sql .= " AND Mdpvend LIKE '%$mdpvend%'";
+	        		if($Pseudovend != "") {
+			            $sql .= " WHERE Pseudovend LIKE '%$Pseudovend%'";
+			            if($Emailvend != ""){
+			                $sql .= " AND Emailvend LIKE '%$Emailvend%'";
+			                if($Mdpvend != ""){
+			                    $sql .= " AND Mdpvend LIKE '%$Mdpvend%'";
 			                }
 			            }
 	        		}
@@ -85,13 +85,36 @@ $db_found = mysqli_select_db($db_handle, $database);
 	            		while($data = mysqli_fetch_assoc($result)){
 	                	// Démarage d'une session
 	            		session_start();
-		                //on récupère la clé primaire de vendeur à savoir pseudo
-		                $recupId = "SELECT Idvend FROM vendeur WHERE Emailvend='$emailvend' AND Mdpvend='$mdpvend'";
-	                	$result2 = mysqli_query($db_handle,$recupId);
-	                	$row = mysqli_fetch_array($result2);
-	                	$id = $row['Idvend'];
-	                	$_SESSION['Idvend']=$id;
-		                header('Location:accueilvendeur.php');
+              			$_SESSION['Pseudovend']=$Pseudovend;
+               			
+               			//$_SESSION['Emailvend'] = '$Emailvend';
+
+
+               	//ID
+               	/*$recupId = "SELECT Idvend FROM vendeur WHERE Emailvend= '$Emailvend' AND Mdpvend='$Mdpvend'";
+               	$result3 = mysqli_query($db_handle,$recupId);
+               	$row = mysqli_fetch_array($result3);
+               	$Idvend = $row['Idvend'];
+               	$_SESSION['Idvend']=$Idvend;
+               	//Pseudo
+				/*$recupPseudo = "SELECT Pseudovend FROM vendeur WHERE Emailvend='$Emailvend' AND Mdpvend='$Mdpvend'";
+               	$result12 = mysqli_query($db_handle,$recupPseudo);
+               	$row = mysqli_fetch_array($result12);
+               	$Pseudovend = $row['Pseudovend'];
+               	$_SESSION['Pseudovend']=$Pseudovend;*/
+               	//
+               	$recupall = "SELECT * FROM vendeur WHERE Emailvend = '$Emailvend'";
+               	if($result=mysqli_query($db_handle,$recupall)){
+               	$stack = array();
+               	while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+               	$stack = ($row);
+               	}
+               	}
+               	$_SESSION['Pseudovend']=$stack['Pseudovend'];
+               	$_SESSION['Idvend'] = $stack['Idvend'];
+               	
+               header('Location:accueilvendeur.php');
+
 		                exit();
 	            		}
 	        		}
@@ -108,7 +131,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 					</tr>
 
 					<tr>
-						<td><input required="required" type="text" name="pseudo" id ="pseudo" class="login-vendeur"></td>
+						<td><input required="required" type="text" name="Pseudovend" id ="pseudo" class="login-vendeur"></td>
 					</tr>
 
 					<tr>
@@ -116,7 +139,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 					</tr>
 
 					<tr>
-						<td><input required="required" type="email" name="email" id ="mail"class="login-vendeur"></td>
+						<td><input required="required" type="email" name="Emailvend" id ="mail"class="login-vendeur"></td>
 					</tr>
 
 					<tr>
