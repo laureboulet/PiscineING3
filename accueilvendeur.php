@@ -1,5 +1,6 @@
 <?php
 session_start();
+//Identification de la BDD
 
 ?>
 
@@ -22,7 +23,7 @@ session_start();
             });
 
 
-        $(document).ready(function() {
+ /*       $(document).ready(function() {
     		$("#file1").change(function(element) {
     			var couverture = element.target.files[0].name;
 
@@ -43,7 +44,7 @@ session_start();
     		});
 		});
 
-
+*/
 
    
     </script>
@@ -61,23 +62,25 @@ session_start();
           		<li class="nav-item"><a class="nav-link" href="accueilvendeur.php"><strong>Accueil</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="afficheritems.php"><strong>Items en vente</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="vendreItem.php"><strong>Vendre un item</strong></a></li>
+                <li class="nav-item"><a class="nav-link" href="decovendeur.php"><strong>Se déconnecter</strong></a></li>
           		<li class="nav-item-compte"><a class="nav-link-compte" href="#"><strong><?php echo $_SESSION['Pseudovend'];?></strong></a></li>
         	</ul>
 
     	</div>
             <ul class="navbar-nav">
-                <img src="profil.png" id="profil" alt="Profil" width="100" height="100" border-radius="50">
+
+                    <?php echo'<img src="profil.png" id="profil" alt="Profil" width="100" height="100" border-radius="50">';?>
+
             </ul>
         		
 
 	</nav>
 
 
-	<header class="page-header header container-fluid">
+	<header class="page-header header container-fluid" style="background-image: url('<?php echo '$Photofond'; ?>');background-size: cover;
+            background-position: center; position: relative;)">
 
-
-
-          
+          <?php var_dump($_SESSION); ?>
          	<div class="description">
                 <h1 align="center"><?php echo "Bienvenue sur votre page vendeur ";echo $_SESSION['Pseudovend']; echo "!";?></h1>
 
@@ -91,11 +94,12 @@ session_start();
 
 
         		<div class="col-lg-6 col-md-6 col-sm-12" align="center">
-        			<h3 class="fondecran">Choississez votre fond d'écran</h3>
+        			<h3 class="fondecran">Choisissez votre fond d'écran</h3>
         			<form action="imageVendeur.php" method="post" enctype="multipart/form-data">
         				<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-        				<label for="file1" class="imagefile">Choisir une image</label>
-        				<input type="file" id="file1" class="inputcache" name="imageFond" accept="image/png">
+
+        				<input type="file" id="Photofond" class="inputcache" name="Photofond" accept="image/png"><br>
+                        <input type="submit" class="imagefile" name="Photofond" value="Choisir un fond">
 
         			</form>
 
@@ -105,8 +109,8 @@ session_start();
         			<h3 class="fondecran">Importez votre photo de profil</h3>
         			<form action="" enctype="multipart/form-data">
         				<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-        				<label for="file2" class="imagefile">Choisir une photo</label>
-        				<input type="file" id="file2" class="inputcache"  accept="image/png">
+        				<input type="file" name="Photoprofil" id="file2" class="inputcache"  accept="image/png"><br>
+                        <input type="submit" class="imagefile" name="Photoprofil" value="Choisir une photo">
 
         			</form>
         		</div>
