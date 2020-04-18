@@ -45,15 +45,21 @@ if($_POST["button2"]){
 				$result2=mysqli_query($db_handle, $recupId);
 				$row=mysqli_fetch_array($result2);
 				$id=$row['Idach'];
-				$_SESSION['Idach']=$id;
+				$_SESSION['idach']=$id;
 
-	$_SESSION['nomtitulaire']=NULL;
-    $_SESSION['date_expiration']=NULL;
-    $_SESSION['numerocb']=NULL;
-    $_SESSION['crypto']=NULL;
-    $_SESSION['typecb']=NULL;
+	$_SESSION['nomtitulaire']='Vide';
+    $_SESSION['date_expiration']='MM/AA';
+    $_SESSION['numerocb']='1000000000000001';
+    $_SESSION['crypto']=101;
+    $_SESSION['typecb']='Typecb';
 
+    $solde= rand(100,10000);
 
+    $creation="INSERT INTO carte(Numero, Date_expiration, Cryptogramme, Nomtitulaire, Solde, Type, ACh) VALUES ('1000000000000001', 'MM/AA', 101, 'Vide', $solde, 'TypeCb', $id )";
+    $result = mysqli_query($db_handle, $creation);
+
+    $panier= "INSERT INTO panier (Achpan) VALUES ($id)";
+    $result = mysqli_query($db_handle, $panier);
 					
 
     echo "<script>alert(\"Félicitations ! Votre compte a été créé !\")</script>";

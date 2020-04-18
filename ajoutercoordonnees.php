@@ -46,15 +46,20 @@ if($_POST["button3"]){
 
     $etranger = $_SESSION['idach'];
 
-    $sql = "INSERT INTO coord(Adresse, Ville, CP, Pays, Telephone, Nomlivr, Prenomlivr,Ach) VALUES('$adresse', '$ville', $cp, '$pays', $telephone, '$nomlivr', '$prenomlivr', $etranger)";
+    $sql = "INSERT INTO coord(Adresse, Ville, CP, Pays, Telephone, Nomlivr, Prenomlivr, Ach) VALUES('$adresse', '$ville', $cp, '$pays', $telephone, '$nomlivr', '$prenomlivr', $etranger)";
 
-    $result = mysqli_query($db_handle, $sql);
+    if($result = mysqli_query($db_handle, $sql)){
+        echo "c'est bon";
+    }
+    else{
+        echo mysqli_error($db_handle);
+    }
 
 
     //vérification de la création de compte
     echo "Félicitations ! Vos coordonnées ont bien été enregistrées !";
     //diréction vers la prochaine page html (page d'accueil achats)
-    header('Location:votrecompte.php');
+    //header('Location:votrecompte.php');
     }
     }
 
