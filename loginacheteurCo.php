@@ -123,9 +123,14 @@ if($_POST["button1"]){
 				    $_SESSION['crypto']=NULL;
 				    $_SESSION['typecb']=NULL;
 
-				    $solde= rand(100,10000);
 
-				    $creation="INSERT INTO carte (Numero, Date_expiration, Cryptogramme, Nomtitulaire, Solde, Type, ACh) VALUES (0000000000000000, 'MM/AA', 000, 'Nom', $solde, 'Type', $id ";
+	$solde= rand(100,10000);
+
+    $creation="INSERT INTO carte(Numero, Date_expiration, Cryptogramme, Nomtitulaire, Solde, Type, ACh) VALUES ('1000000000000001', 'MM/AA', 101, 'Vide', $solde, 'TypeCb', $id )";
+    $result = mysqli_query($db_handle, $creation);
+   
+				    
+ 
 
 
 				}
@@ -148,7 +153,7 @@ if($_POST["button1"]){
                         }
        					$_SESSION['date_expiration']=$stack['Date_expiration'];
        					$_SESSION['numerocb']=$stack['Numero'];
-       					$_SESSION['crypto']=$stack['Cryptogramme'];
+       					//$_SESSION['crypto']= 'XXX';
        					$_SESSION['typecb']=$stack['Type'];
 				}else{
 					$json =  @json_encode("aille");

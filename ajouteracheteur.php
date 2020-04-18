@@ -31,8 +31,32 @@ if($_POST["button2"]){
     else{
         $sql = "INSERT INTO acheteur(Nomach, Prenomach, Emailach, Mdpach) VALUES('$nom', '$prenom', '$email', '$mdp')";
     $result = mysqli_query($db_handle, $sql);
+    // Démarage d'une session
+	session_start();
+	//on récupère la clé primaire de acheteur à savoir l'email
+	$_SESSION['emailach']=$email;
+	$_SESSION['prenomach']=$prenom;
+	$_SESSION['nomach']=$nom;
+	$_SESSION['mdpach']=$mdp;
+	//on récupère des informations de la table pour les stocker dans nnotre session
 
-    echo "Félicitations ! Votre compte a été crée !";
+				//id
+				$recupId="SELECT Idach FROM acheteur WHERE Emailach='$email' AND Mdpach = '$mdp'";
+				$result2=mysqli_query($db_handle, $recupId);
+				$row=mysqli_fetch_array($result2);
+				$id=$row['Idach'];
+				$_SESSION['Idach']=$id;
+
+	$_SESSION['nomtitulaire']=NULL;
+    $_SESSION['date_expiration']=NULL;
+    $_SESSION['numerocb']=NULL;
+    $_SESSION['crypto']=NULL;
+    $_SESSION['typecb']=NULL;
+
+
+					
+
+    echo "<script>alert(\"Félicitations ! Votre compte a été créé !\")</script>";
     header('Location:loginacheteur3.php');
 
     }
