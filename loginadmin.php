@@ -83,7 +83,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Connection" name="buttonadmin"></td>
+					<td><input type="submit" value="Connexion" name="buttonadmin"></td>
 				</tr>
 			</table>
 		</form>
