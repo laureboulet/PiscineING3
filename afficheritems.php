@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse" id="main-navigation">
           <ul class="navbar-nav">
               <li class="nav-item"><a class="nav-link" href="accueilvendeur.php"><strong>Accueil</strong></a></li>
-              <li class="nav-item"><a class="nav-link" href="afficheritems.php"><strong>Items en vente</strong></a></li>
+              <li class="nav-item"><a class="nav-link" href="afficheritem.php"><strong>Items en vente</strong></a></li>
               <li class="nav-item"><a class="nav-link" href="vendreItem.php"><strong>Vendre un item</strong></a></li>
               <li class="nav-item"><a class="nav-link" href="decovendeur.php"><strong>Se déconnecter</strong></a></li>
               <li class="nav-item-compte"><a class="nav-link-compte" href="#"><strong><?php echo $_SESSION['Pseudovend'];?></strong></a></li>
@@ -84,36 +84,13 @@
       </div>
       <!-- /.col-lg-3 -->
       <div class="col-lg-9">
-        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="ferraille.jpg" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="musee.png" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="vip.jpg" alt="Third slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
+
         <div class="row">
         <?php
           if ($db_found) {
-            $sql = "SELECT * FROM item"; 
+            $idvend = $_SESSION['Idvend'];
+            $sql = "SELECT * FROM item WHERE Venditem LIKE $idvend";
+
             $result = mysqli_query($db_handle, $sql);
             if (mysqli_num_rows($result) == 0) {
               echo "Pas d'item à vendre."; 
@@ -158,10 +135,10 @@
   <!-- Footer -->
   <footer class="page-footer text-center"> 
     <div id="nav">
-            <a class="link" href="accueiladmin.html">Accueil |</a>
-            <a class="link" href="gereritem.php">Items en vente |</a>
-            <a class="link" href="gerervendeur.php">Vendre un item |</a>
-            <a class="link" href="#">Déconnexion</a>
+            <a class="link" href="accueilvendeur.php">Accueil |</a>
+            <a class="link" href="afficheritems.php">Items en vente |</a>
+            <a class="link" href="vendreItem.php">Vendre un item |</a>
+            <a class="link" href="decovendeur.php">Déconnexion</a>
         </div>
         <br>
     <div class="container">
