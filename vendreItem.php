@@ -11,85 +11,13 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="vendreitem.css">
+    <link rel="stylesheet" href="item.css">
 	<script type="text/javascript">
 
         $(document).ready(function()
             { $('.header').height($(window).height());
             });
 
-		/*    $(document).ready(function(){
-        	$('#button1').click(function(){
-				if($('#enchere').is(':checked') || $('#offre').is(':checked'))
-				{
- 					alert("Item ajouté");
-				}
-				else{
-					alert("Faux");
-				}
-			}
-		});	*/
-
-		/*function validate(){
-			function validateNom();
-			function validateDescri();
-			function validateCategorie();
-			function validateAchat();
-		}
-
-		function validateNom(){
-			var nom = document.getElementById("nom");
-
-			if(nom == '') {
-				
-				ajout-item.description.style.border = "1px solid red";
-			}
-			else{
-				ajout-item.description.style.border = "1px solid grey";
-			}
-
-		}
-
-		function validateDescri(){
-			var description = document.getElementById("description");
-
-			if(description == '') {
-				
-				ajout-item.nom.style.border = "1px solid grey";
-			}
-			else{
-				
-			}
-
-		}
-		function validateCategorie(){
-			var categorie = document.getElementById("catégorie");
-
-			if(!categorie.required) {
-				
-				categorie.style.border = "1px solid red";
-			}
-			else{
-				categorie.style.border = "1px solid #ccc";
-			}
-
-		}
-
-		function validateAchat(){
-
-			if(document.getElementById("encheres").checked || document.getElementById("offre").checked) {
-				alert("Item ajouté!");
-				
-			}
-			else{
-				
-				alert("Choisissez Enchères ou Meilleure offre!");
-			}
-
-
-		}*/
-
-   
     </script>
 </head>
 
@@ -105,6 +33,7 @@ session_start();
           		<li class="nav-item"><a class="nav-link" href="accueilvendeur.php"><strong>Accueil</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="afficheritems.php"><strong>Items en vente</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="vendreItem.php"><strong>Vendre un item</strong></a></li>
+          		<li class="nav-item"><a class="nav-link" href="decovendeur.php"><strong>Se déconnecter</strong></a></li>
           		<li class="nav-item-compte"><a class="nav-link-compte" href="#"><strong><?php echo $_SESSION['Pseudovend'];?></strong></a></li>
         	</ul>
         	 <ul class="navbar-nav">
@@ -200,6 +129,7 @@ session_start();
 
 
 	    					   	<td class="ajout" colspan="2" align="left"><input type="submit" name="vendreItem" id="boutton" value="Ajouter item" /></td>
+	    					   	
    							</tr>
    						</table>
    					</div></div></div>
@@ -215,9 +145,9 @@ session_start();
 
 	<footer class="page-footer text-center"> 
 		<div id="nav">
-            <a class="link" href="loginvendeur.php">Login vendeur |</a>
-            <a class="link" href="loginacheteur.php">Login acheteur |</a>
-            <a class="link" href="#">Login administrateur |</a>
+            <a class="link" href="accueilvendeur.php">Accueil |</a>
+            <a class="link" href="afficheritems.php">Items en vente |</a>
+            <a class="link" href="vendreItem.php">Vendre un item</a>
         </div>
         <br>
 		<div class="container">
