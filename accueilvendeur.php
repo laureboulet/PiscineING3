@@ -123,8 +123,8 @@ $db_found = mysqli_select_db($db_handle, $database);
     </header>
     <footer class="page-footer text-center"> 
         <div id="nav">
-            <a class="link" href="loginvendeur.html">Accueil | </a>
-            <a class="link" href="#"> Items en vente | </a>
+            <a class="link" href="accueilvendeur.php">Accueil | </a>
+            <a class="link" href="afficheritems.php"> Items en vente | </a>
             <a class="link" href="vendreItem.php"> Vendre un item </a>
         </div>
         <br>
