@@ -1,7 +1,10 @@
 <?php
 session_start();
 //Identification de la BDD
-
+$database = "piscineweb";
+//Connexion à la BDD
+$db_handle = mysqli_connect('localhost', 'root', 'root');
+$db_found = mysqli_select_db($db_handle, $database);
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +72,7 @@ session_start();
     	</div>
             <ul class="navbar-nav">
 
-                    <?php echo'<img src="profil.png" id="profil" alt="Profil" width="100" height="100" border-radius="50">';?>
+                    <?php echo"<img src='$Photoprofil' id='profil' alt='Profil' width='100' height='100' border-radius='50'>";?>
 
             </ul>
         		
@@ -80,7 +83,7 @@ session_start();
 	<header class="page-header header container-fluid" style="background-image: url('<?php echo '$Photofond'; ?>');background-size: cover;
             background-position: center; position: relative;)">
 
-          <?php var_dump($_SESSION); ?>
+
          	<div class="description">
                 <h1 align="center"><?php echo "Bienvenue sur votre page vendeur ";echo $_SESSION['Pseudovend']; echo "!";?></h1>
 
@@ -89,6 +92,7 @@ session_start();
                </p><br><br><br>
 
             </div>
+
             <div class="row">
                 
 
@@ -107,9 +111,9 @@ session_start();
 
         		<div class="col-lg-6 col-md-6 col-sm-12" align="center">
         			<h3 class="fondecran">Importez votre photo de profil</h3>
-        			<form action="" enctype="multipart/form-data">
+        			<form action="imageVendeur.php" method="post" enctype="multipart/form-data">
         				<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-        				<input type="file" name="Photoprofil" id="file2" class="inputcache"  accept="image/png"><br>
+        				<input type="file" name="Photoprofil" id="Photoprofil" class="inputcache"  accept="image/png"><br>
                         <input type="submit" class="imagefile" name="Photoprofil" value="Choisir une photo">
 
         			</form>
