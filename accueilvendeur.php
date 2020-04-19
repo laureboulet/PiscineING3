@@ -1,10 +1,84 @@
 <?php
 session_start();
+    //Récupérer les données du formulaire
+$Photofond = isset($_FILES["Photofond"]) ? $_FILES["Photofond"] : "";
+$Photoprofil = isset($_FILES["Photoprofil"]) ? $_FILES["Photoprofil"] : "";
+
 //Identification de la BDD
 $database = "piscineweb";
 //Connexion à la BDD
 $db_handle = mysqli_connect('localhost', 'root', 'root');
 $db_found = mysqli_select_db($db_handle, $database);
+
+
+$Photofond = $_FILES['Photofond']['name'];
+$Photoprofil = $_FILES['Photoprofil']['name'];
+
+if($_POST["Photofond"]){
+    if($db_found){
+        $sql = "SELECT * FROM vendeur";
+        if(isset($Pseudovend)) {
+            $sql .= "WHERE Pseudovend LIKE '%$Pseudovend'";
+        }
+        $result = mysqli_query($db_handle,$sql);
+
+        if(mysqli_num_rows($result)==0)
+        {
+            echo 'Erreur';
+            //$_SESSION['Pseudovend']=$Pseudovend;
+            //header('Location:accueilvendeur.php');
+        }
+        else{
+
+            $sql = "UPDATE vendeur SET Photofond = '$Photofond' WHERE Pseudovend ='" .$_SESSION['Pseudovend']. "'";
+            $result = mysqli_query($db_handle, $sql);
+            $sql = "SELECT * FROM vendeur";
+                if(isset($Pseudovend)) {
+                    $sql .= "WHERE Pseudovend LIKE '%$Pseudovend%'";
+                }
+            $result = mysqli_query($db_handle, $sql);
+            //while ($data = mysqli_fetch_assoc($result)) {
+                //$fond=$result['$Photofond'];
+
+
+        }
+    }
+    else{
+        echo 'Database not found';
+    }
+}
+if($_POST["Photoprofil"]){
+    if($db_found){
+        $sql = "SELECT * FROM vendeur";
+        if(isset($Pseudovend)) {
+            $sql .= "WHERE Pseudovend LIKE '%$Pseudovend'";
+        }
+        $result = mysqli_query($db_handle,$sql);
+
+        if(mysqli_num_rows($result)==0)
+        {
+            echo 'Erreur';
+            //$_SESSION['Pseudovend']=$Pseudovend;
+            //header('Location:accueilvendeur.php');
+        }
+        else{
+
+            $sql = "UPDATE vendeur SET Photoprofil = '$Photoprofil' WHERE Pseudovend ='" .$_SESSION['Pseudovend']. "'";
+            $result = mysqli_query($db_handle, $sql);
+            $sql = "SELECT * FROM vendeur";
+                if(isset($Pseudovend)) {
+                    $sql .= "WHERE Pseudovend LIKE '%$Pseudovend%'";
+                }
+            $result = mysqli_query($db_handle, $sql);
+
+
+
+        }
+    }
+    else{
+        echo 'Database not found';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +146,7 @@ $db_found = mysqli_select_db($db_handle, $database);
     	</div>
             <ul class="navbar-nav">
 
+                    
                     <?php echo"<img src='$Photoprofil' id='profil' alt='Profil' width='100' height='100' border-radius='50'>";?>
 
             </ul>
@@ -80,8 +155,8 @@ $db_found = mysqli_select_db($db_handle, $database);
 	</nav>
 
 
-	<header class="page-header header container-fluid" style="background-image: url('<?php echo '$Photofond'; ?>');background-size: cover;
-            background-position: center; position: relative;)">
+	<header class="page-header header container-fluid" style="background-image: url('<?php echo "$Photofond"; ?>') ;background-size: cover;
+            background-position: center; position: relative;">
 
 
          	<div class="description">
@@ -99,7 +174,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 
         		<div class="col-lg-6 col-md-6 col-sm-12" align="center">
         			<h3 class="fondecran">Choisissez votre fond d'écran</h3>
-        			<form action="imageVendeur.php" method="post" enctype="multipart/form-data">
+        			<form action="accueilvendeur.php" method="post" enctype="multipart/form-data">
         				<input type="hidden" name="MAX_FILE_SIZE" value="100000">
 
         				<input type="file" id="Photofond" class="inputcache" name="Photofond" accept="image/png"><br>
@@ -111,7 +186,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 
         		<div class="col-lg-6 col-md-6 col-sm-12" align="center">
         			<h3 class="fondecran">Importez votre photo de profil</h3>
-        			<form action="imageVendeur.php" method="post" enctype="multipart/form-data">
+        			<form action="accueilvendeur.php" method="post" enctype="multipart/form-data">
         				<input type="hidden" name="MAX_FILE_SIZE" value="100000">
         				<input type="file" name="Photoprofil" id="Photoprofil" class="inputcache"  accept="image/png"><br>
                         <input type="submit" class="imagefile" name="Photoprofil" value="Choisir une photo">
@@ -125,7 +200,8 @@ $db_found = mysqli_select_db($db_handle, $database);
         <div id="nav">
             <a class="link" href="accueilvendeur.php">Accueil | </a>
             <a class="link" href="afficheritems.php"> Items en vente | </a>
-            <a class="link" href="vendreItem.php"> Vendre un item </a>
+            <a class="link" href="vendreItem.php"> Vendre un item |</a>
+            <a class="link" href="decovendeur.php"> Déconnexion </a>
         </div>
         <br>
         <div class="container">
