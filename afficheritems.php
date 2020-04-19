@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse" id="main-navigation">
           <ul class="navbar-nav">
               <li class="nav-item"><a class="nav-link" href="accueilvendeur.php"><strong>Accueil</strong></a></li>
-              <li class="nav-item"><a class="nav-link" href="afficheritem.php"><strong>Items en vente</strong></a></li>
+              <li class="nav-item"><a class="nav-link" href="afficheritems.php"><strong>Items en vente</strong></a></li>
               <li class="nav-item"><a class="nav-link" href="vendreItem.php"><strong>Vendre un item</strong></a></li>
               <li class="nav-item"><a class="nav-link" href="decovendeur.php"><strong>Se déconnecter</strong></a></li>
               <li class="nav-item-compte"><a class="nav-link-compte" href="#"><strong><?php echo $_SESSION['Pseudovend'];?></strong></a></li>
@@ -160,8 +160,8 @@
     <div id="nav">
             <a class="link" href="accueiladmin.html">Accueil |</a>
             <a class="link" href="gereritem.php">Items en vente |</a>
-            <a class="link" href="gerervendeur.php">Vendeurs |</a>
-            <a class="link" href="#">Enchères</a>
+            <a class="link" href="gerervendeur.php">Vendre un item |</a>
+            <a class="link" href="#">Déconnexion</a>
         </div>
         <br>
     <div class="container">
