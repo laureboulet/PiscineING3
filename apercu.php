@@ -1,10 +1,6 @@
 <?php
   session_start();
- 
-  //$nomitem = isset($_POST["nomitem"])? $_POST["nomitem"] : "";
-
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -32,9 +28,10 @@
             <form method="post" action="categorie.php" class="item nav-link2">
               <input class="list-group-item" type="submit" name="categorie" value="Catégories">
             </form>
-              <li class="nav-item"><a class="nav-link2" href="categorie.php"><strong>Catégories</strong></a></li> 
-              <li class="nav-item"><a class="nav-link2" href="achat.php"><strong>Achat</strong></a></li>
-              <li class="nav-item"><a class="nav-link2" href="loginvendeur.php"><strong>Vendre</strong></a></li><!-- comment se déconnecter de acheteur?--> 
+            <form method="post" action="achat.php" class="item nav-link2">
+              <input class="list-group-item" type="submit" name="achat" value="Achat">
+            </form>
+              <li class="nav-item"><a class="nav-link2" href="loginvendeur.php"><strong>Vendre</strong></a></li>
               <li class="nav-item"><a class="nav-link2" href="votrecompte.php"><strong>Votre compte</strong></a></li>
               <li class="nav-item"><a class="nav-link2" href="panier.php"><img src="panier.png" alt="Logo" width="65" height="45"/></a></li> 
               <li class="nav-item"><a class="nav-link2" href="loginadmnin.php"><strong>Admin</strong></a></li>
@@ -45,22 +42,22 @@
 
 
 <?php
- 
-function ajouterpanier(){
+$iditem=$_GET["id"];
+$idach=$_SESSION['idach'];
+function ajouterpanier($iditem,$idach){
 
   $database = "piscineweb";
   //connectez-vous de votre BDD
-  $db_handle = mysqli_connect('localhost', 'root', ''); 
+  $db_handle = mysqli_connect('localhost', 'root', 'root'); 
   $db_found = mysqli_select_db($db_handle, $database);
   //$_SESSION['iditem']=1;
   //$_SESSION['idach']=6;
-  $iditem=$_SESSION['iditem'];
-  $idach=$_SESSION['idach'];
 
     $sql="SELECT Nomtitulaire FROM carte WHERE Ach = $idach";
             $result=mysqli_query($db_handle, $sql);
             $row=mysqli_fetch_array($result);
-            if($row == 'Vide'){
+            $titulaire = $row['Nomtitulaire'];
+            if($titulaire == 'Vide'){
               echo "<script>alert(\"Veuillez d'abord entrer une carte dans votre espace personnel !\")</script>";
             }
             else{
@@ -72,17 +69,17 @@ function ajouterpanier(){
             }
 }
 if(isset($_GET['hello'])){
-  ajouterpanier();
+  ajouterpanier($iditem,$idach);
 }
 
 ?>
   <!-- Page Content -->
-  <div class="container" style="padding-top: 35px">
+  <div class="container" style="padding-top: 120px">
     <div class="row">
       <div class="col-lg-3">
         <h1 class="my-4 ">Ebay ECE</h1>
         <div class="list-group">
-          <a href="apercu.php?hello=true" class="list-group-item ">Ajouter l'article à mon panier</a>
+          <a href="apercu.php?id=<?php echo $iditem?>&hello=true" class="list-group-item ">Ajouter l'article à mon panier</a>
           <a href="javascript:history.go(-1)" class="list-group-item">Revenir à la page de recherche</a>
         </div>
       </div>
@@ -93,11 +90,9 @@ if(isset($_GET['hello'])){
         <?php 
           $database = "piscineweb";
           //connectez-vous de votre BDD
-          $db_handle = mysqli_connect('localhost', 'root', ''); 
+          $db_handle = mysqli_connect('localhost', 'root', 'root'); 
           $db_found = mysqli_select_db($db_handle, $database);
-            // $_SESSION['iditem']=1;
-         // $_SESSION['idach']=2;
-          $iditem=$_SESSION['iditem'];
+          $iditem=$_GET["id"];
           $idach=$_SESSION['idach'];
             
           $sql = "SELECT * FROM item WHERE Iditem=$iditem"; 
@@ -105,11 +100,8 @@ if(isset($_GET['hello'])){
           $result=mysqli_query($db_handle,$sql);
           $stack = array();
           while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-                    $stack = (
-                        $row
-                    );      
-                }
-           
+              $stack = ($row);      
+          }          
         ?>
 
         <div class="card mt-4">
@@ -136,9 +128,9 @@ if(isset($_GET['hello'])){
   <footer class="page-footer text-center"> 
     <div id="nav">
             <a class="link" href="loginvendeur.php">Vendre |</a>
-            <a class="link" href="#">Votre compte |</a>
+            <a class="link" href="votrecompte.php">Votre compte |</a>
             <a class="link" href="loginadmin.php">Admin |</a>
-            <a class="link" href="#">Déconnexion</a>
+            <a class="link" href="loginacheteur.php">Déconnexion</a>
         </div>
         <br>
     <div class="container">
