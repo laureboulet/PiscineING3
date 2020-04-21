@@ -1,23 +1,34 @@
 <?php
 session_start();
+//Récupérer les données du formulaire
+$Nomitem = isset($_POST["Nomitem"]) ? $_POST["Nomitem"] : "";
+$Description = isset($_POST["Description"]) ? $_POST["Description"] : "";
+$Photo1 = isset($_POST["photo1"]) ? $_POST["photo1"] : "";
+$Categorie = isset($_POST["Categorie"]) ? $_POST["Categorie"] : "";
+$Typeachat = isset($_POST["Typeachat"]) ? $_POST["Typeachat"] : "";
+$Prixitem = isset($_POST["Prixitem"]) ? $_POST["Prixitem"] : "";
+
+//Identification de la BDD
+$database = "piscineweb";
+//Connexion à la BDD
+$db_handle = mysqli_connect('localhost', 'root', 'root');
+$db_found = mysqli_select_db($db_handle, $database);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Vendre un itemr</title>
+	<title>Vendre un item</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="item.css">
+    <link rel="stylesheet" href="itemvendeur.css">
 	<script type="text/javascript">
-
         $(document).ready(function()
             { $('.header').height($(window).height());
-            });
-
+            }); 
     </script>
 </head>
 
@@ -33,20 +44,48 @@ session_start();
           		<li class="nav-item"><a class="nav-link" href="accueilvendeur.php"><strong>Accueil</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="afficheritems.php"><strong>Items en vente</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="vendreItem.php"><strong>Vendre un item</strong></a></li>
-          		<li class="nav-item"><a class="nav-link" href="decovendeur.php"><strong>Se déconnecter</strong></a></li>
+          		<li class="nav-item"><a class="nav-link2" href="loginvendeur.php"><img src="deconnexion.png" alt="Logo" width="25" height="25"/></a></li>
           		<li class="nav-item-compte"><a class="nav-link-compte" href="#"><strong><?php echo $_SESSION['Pseudovend'];?></strong></a></li>
         	</ul>
-        	 <ul class="navbar-nav">
-                <img src="profil.png" id="profil" alt="Profil" width="100" height="100" border-radius="50">
+        	<ul class="navbar-nav">
+                <?php 
+                session_start();
+                $profilvend = $_SESSION['photoprofil'];
+                $fondvend = $_SESSION['photofond'];
+                echo"<img src='$profilvend' id='profil' alt='Profil' width='100' height='100' border-radius='50'>";?>
             </ul>
         </div>
     </nav>
-
-	    	<header class="page-header header container-fluid">
-	    	<!-- VOIR DANS NOTE POUR RAJOUTER PHP MESSAGE D'ALERTE-->
+    <?php
+    
+	if($_POST["vendreItem"]){
+	    if($db_found){
+	        $sql = "SELECT * FROM item";
+	        if($Nomitem != "") {
+	            $sql .= " WHERE Nomitem LIKE '%$Nomitem%'";
+	            }
+	        $result = mysqli_query($db_handle, $sql);
+	    	if (mysqli_num_rows($result) != 0){
+	            echo("Vous avez déja ajouté cet item !");
+	    	}
+	   		else{
+	            session_start();
+	            $etranger = $_SESSION['idvend'];
+	            $sql = "INSERT INTO item(Nomitem, Prixitem, Description, Categorie, Typeachat, Venditem, Photo1) VALUES('$Nomitem',$Prixitem,'$Description','$Categorie','$Typeachat', $etranger,'$Photo1')";
+	    	   	$result = mysqli_query($db_handle, $sql);
+	    	   
+	     	    echo "Item ajouté" ;
+		   	}
+	    }
+		else{
+	    	echo "Database not found";
+	    }	    
+	}
+    ?>
+	    	<header class="page-header header container-fluid" style="background-image: url(new.png);background-size: cover;
+            background-position: center; position: relative;">
 	    		<h1><strong>Publiez un item à vendre</strong></h1><br>
-	    		<h3><strong>Item n°rajoute codephp numitem incrémenté</strong></h3>
-	    		<form class="item" action="ajouteritem.php" method="post" enctype="multipart/form-data">
+	    		<form class="item" action="vendreItem.php" method="post" enctype="multipart/form-data">
 	    			<div class="container">
 	    				<div class="row">
 	    					<div class="col-lg-6 col-md-6 col-sm-12">
@@ -73,10 +112,11 @@ session_start();
 	    					<div class="col-lg-6 col-md-6 col-sm-12" style="padding-left:350px;">
    								<table>
    									<tr>
-   										<td class="champs"> Photo </td>
+   										<td class="champs"> Choisir une photo </td>
 									</tr>
    									<tr>
-   										<td class="encadre"><label for="photoitem" class="imageItem">Choisir une photo</label><input type="file" id="photoitem" name="Photo1" class="inputcache" accept="image/png"></td>
+   										<td>
+											<input type="text" class="ajout-item" name="photo1"></td>
    									</tr>
    									<tr>
    										<td class="champs"> Vidéo(si disponible) </td>
@@ -129,15 +169,10 @@ session_start();
 
 
 	    					   	<td class="ajout" colspan="2" align="left"><input type="submit" name="vendreItem" id="boutton" value="Ajouter item" /></td>
-	    					   	
    							</tr>
    						</table>
    					</div></div></div>
-
-
-	 </form>
-	    		
-
+	 </form>	    		
 	    		
 </header>
 
@@ -146,8 +181,9 @@ session_start();
 	<footer class="page-footer text-center"> 
 		<div id="nav">
             <a class="link" href="accueilvendeur.php">Accueil |</a>
-            <a class="link" href="afficheritems.php">Items en vente |</a>
-            <a class="link" href="vendreItem.php">Vendre un item</a>
+            <a class="link" href="gereritem.php">Items en vente |</a>
+            <a class="link" href="vendreItem.php">Vendre un item |</a>
+            <a class="link" href="decovendeur.php">Déconnexion</a>
         </div>
         <br>
 		<div class="container">
