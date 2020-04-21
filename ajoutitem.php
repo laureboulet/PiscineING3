@@ -6,7 +6,7 @@
 	$achat = isset($_POST["achat"])? $_POST["achat"] : "";
 	$categorie = isset($_POST["categorie"])? $_POST["categorie"] : "";
 	$prixItem = isset($_POST["prixItem"])? $_POST["prixItem"] : ""; 
-	$photo1 = isset($_FILES["photo1"])? $_FILES["photo1"] : ""; 
+	$photo1 = isset($_POST["photo1"])? $_POST["photo1"] : ""; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
 </head>
 <body>
 	<?php
-	$photo1 = $_FILES['photo1']['name'];
+	//$photo1 = $_FILES['photo1']['name'];
 	//$photo1 = basename($_FILES['photo1']['name']);
 	if(isset($_POST["vendreItem"])){
 		if ($db_found) {
@@ -37,6 +37,7 @@
 					VALUES('$Nomitem', $prixItem, '$Description', '$categorie',$etranger, '$photo1', '$achat')"; 
 				$result = mysqli_query($db_handle, $sql);
 				echo "Vous avez bien ajouté un item.";
+				//ajouter table enchere puis truc d enchere si typeachat = enchere ou enchere et achat immédiat
 			}
 		}
 		else{
@@ -70,12 +71,11 @@
 				<div class="col-lg-6 col-md-6 col-sm-12" style="padding-left:350px;">
 					<table>
 						<tr>
-							<td class="champs"> Photo </td>
+							<td class="champs"> Choisir une photo </td>
 						</tr>
 						<tr>
-							<td class="encadre"><label for="photoitem" class="imageItem">Choisir une photo</label>
-								<!--<input type="hidden" name="MAX_SIZE_FILE" value="100000">-->
-								<input type="file" id="photoitem" class="inputcache" name="photo1" accept="image/png,image/jpeg"></td><!--accept="image/png"-->
+							<td>
+								<input type="text" class="ajout-item" name="photo1"></td>
 						</tr>
 						<tr>
 							<td class="champs"> Vidéo(si disponible) </td>

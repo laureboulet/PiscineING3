@@ -11,7 +11,7 @@
 			header('Location: ajoutitem.php');
 		}
 		if(isset($_POST["buttonaction2"])){
-			header('Location: supprimeritem.php');
+			header('Location: supprimeritemadmin.php');
 		}
 		?>
 		<form method="post" class="actionitem" action="gereritem.php">
