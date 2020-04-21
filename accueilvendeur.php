@@ -1,86 +1,52 @@
 <?php
 session_start();
-    //Récupérer les données du formulaire
-$Photofond = isset($_FILES["Photofond"]) ? $_FILES["Photofond"] : "";
-$Photoprofil = isset($_FILES["Photoprofil"]) ? $_FILES["Photoprofil"] : "";
-
+$Photofond = isset($_POST["Photofond"]) ? $_POST["Photofond"] : "";
+$Photoprofil = isset($_POST["Photoprofil"]) ? $_POST["Photoprofil"] : "";
 //Identification de la BDD
 $database = "piscineweb";
 //Connexion à la BDD
 $db_handle = mysqli_connect('localhost', 'root', 'root');
 $db_found = mysqli_select_db($db_handle, $database);
-
-
-$Photofond = $_FILES['Photofond']['name'];
-$Photoprofil = $_FILES['Photoprofil']['name'];
-
-if($_POST["Photofond"]){
-    if($db_found){
-        $sql = "SELECT * FROM vendeur";
-        if(isset($Pseudovend)) {
-            $sql .= "WHERE Pseudovend LIKE '%$Pseudovend'";
-        }
-        $result = mysqli_query($db_handle,$sql);
-
-        if(mysqli_num_rows($result)==0)
-        {
-            echo 'Erreur';
-            //$_SESSION['Pseudovend']=$Pseudovend;
-            //header('Location:accueilvendeur.php');
-        }
-        else{
-
-            $sql = "UPDATE vendeur SET Photofond = '$Photofond' WHERE Pseudovend ='" .$_SESSION['Pseudovend']. "'";
-            $result = mysqli_query($db_handle, $sql);
-            $sql = "SELECT * FROM vendeur";
-                if(isset($Pseudovend)) {
-                    $sql .= "WHERE Pseudovend LIKE '%$Pseudovend%'";
-                }
-            $result = mysqli_query($db_handle, $sql);
-            //while ($data = mysqli_fetch_assoc($result)) {
-                //$fond=$result['$Photofond'];
-
-
-        }
-    }
-    else{
-        echo 'Database not found';
-    }
-}
-if($_POST["Photoprofil"]){
-    if($db_found){
-        $sql = "SELECT * FROM vendeur";
-        if(isset($Pseudovend)) {
-            $sql .= "WHERE Pseudovend LIKE '%$Pseudovend'";
-        }
-        $result = mysqli_query($db_handle,$sql);
-
-        if(mysqli_num_rows($result)==0)
-        {
-            echo 'Erreur';
-            //$_SESSION['Pseudovend']=$Pseudovend;
-            //header('Location:accueilvendeur.php');
-        }
-        else{
-
-            $sql = "UPDATE vendeur SET Photoprofil = '$Photoprofil' WHERE Pseudovend ='" .$_SESSION['Pseudovend']. "'";
-            $result = mysqli_query($db_handle, $sql);
-            $sql = "SELECT * FROM vendeur";
-                if(isset($Pseudovend)) {
-                    $sql .= "WHERE Pseudovend LIKE '%$Pseudovend%'";
-                }
-            $result = mysqli_query($db_handle, $sql);
-
-
-
-        }
-    }
-    else{
-        echo 'Database not found';
-    }
-}
 ?>
+<?php
+    if($_POST["fond"]){
+    if($db_found){
+        $sql = "SELECT * FROM vendeur";
+        if($Photofond != "") {
+            $sql .= "WHERE Photofond LIKE '%$Photofond'";
+        }
+        $result = mysqli_query($db_handle,$sql);
 
+        session_start();
+        $_SESSION['photofond']=$Photofond;
+            $vendeur = $_SESSION['idvend'];
+            $sql = "UPDATE vendeur SET Photofond='$Photofond' WHERE Idvend =$vendeur";
+            $result = mysqli_query($db_handle, $sql);
+    }
+    else{
+        echo 'Database not found';
+    }
+}
+if($_POST["profil"]){
+    if($db_found){
+        $sql = "SELECT * FROM vendeur";
+        if($Photoprofil != "") {
+            $sql .= "WHERE Photoprofil LIKE '%$Photoprofil'";
+        }
+        $result = mysqli_query($db_handle,$sql);
+
+            session_start();
+            $_SESSION['photoprofil']=$Photoprofil;
+            $vendeur = $_SESSION['idvend'];
+            $sql = "UPDATE vendeur SET Photoprofil = '$Photoprofil' WHERE Idvend =$vendeur";
+            $result = mysqli_query($db_handle, $sql);
+    }
+    else{
+        echo 'Database not found';
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,39 +57,11 @@ if($_POST["Photoprofil"]){
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-
-	<link rel="stylesheet" href="accueilvendeur.css">
+	<link rel="stylesheet" href="itemvendeur.css">
     <script type="text/javascript">
-
-            $(document).ready(function()
-            { $('.header').height($(window).height());
-            });
-
-
- /*       $(document).ready(function() {
-    		$("#file1").change(function(element) {
-    			var couverture = element.target.files[0].name;
-
-        		$("header").css("background-image", "url(" + couverture + ")" );
-    		});
-		});
-
-		$(document).ready(function() {
-    		$("#file2").change(function(imgpro) {
-    			var profile = imgpro.target.files[0].name;
-    			var largeur = imgpro.target.files[0].width;
-    			var hauteur = imgpro.target.files[0].height;
-
-    			$("#profil").css("src", "url(" + profile + ")");
-    			$("#profil").css("width", "100");
-    			$("#profil").css("height", "100");
-
-    		});
-		});
-
-*/
-
-   
+        $(document).ready(function()
+        { $('.header').height($(window).height());
+        });
     </script>
 </head>
 
@@ -139,29 +77,24 @@ if($_POST["Photoprofil"]){
           		<li class="nav-item"><a class="nav-link" href="accueilvendeur.php"><strong>Accueil</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="afficheritems.php"><strong>Items en vente</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="vendreItem.php"><strong>Vendre un item</strong></a></li>
-                <li class="nav-item"><a class="nav-link" href="decovendeur.php"><strong>Se déconnecter</strong></a></li>
-          		<li class="nav-item-compte"><a class="nav-link-compte" href="#"><strong><?php echo $_SESSION['Pseudovend'];?></strong></a></li>
+                <li class="nav-item"><a class="nav-link2" href="loginvendeur.php"><img src="deconnexion.png" alt="Logo" width="25" height="25"/></a></li>
+                <li class="nav-item-compte"><a class="nav-link-compte" href="#"><strong><?php echo $_SESSION['Pseudovend'];?></strong></a></li>
         	</ul>
-
-    	</div>
             <ul class="navbar-nav">
-
-                    
-                    <?php echo"<img src='$Photoprofil' id='profil' alt='Profil' width='100' height='100' border-radius='50'>";?>
-
+                <?php 
+                session_start();
+                $profilvend = $_SESSION['photoprofil'];
+                $fondvend = $_SESSION['photofond'];
+                $pseudovendeur=$_SESSION['pseudovend'];
+                echo"<img src='$profilvend' id='profil' alt='Profil' width='100' height='100' border-radius='50'>";?>
             </ul>
-        		
-
+        </div>		
 	</nav>
 
-
-	<header class="page-header header container-fluid" style="background-image: url('<?php echo "$Photofond"; ?>') ;background-size: cover;
+	<header class="page-header header container-fluid" style="background-image: url(new.png);background-size: cover;
             background-position: center; position: relative;">
-
-
          	<div class="description">
-                <h1 align="center"><?php echo "Bienvenue sur votre page vendeur ";echo $_SESSION['Pseudovend']; echo "!";?></h1>
-
+                <h1 align="center"><?php echo "Bienvenue sur votre page vendeur "; echo $pseudovendeur; echo "!";?></h1>
                 <p align="center">
                 Vous pouvez ajouter et supprimer des items à vendre ou suivre les ventes de vos items en temps réel !
                </p><br><br><br>
@@ -169,28 +102,21 @@ if($_POST["Photoprofil"]){
             </div>
 
             <div class="row">
-                
-
-
-        		<div class="col-lg-6 col-md-6 col-sm-12" align="center">
+        		<div class="col-lg-6 col-md-6 col-sm-12 accueilvend" align="center">
         			<h3 class="fondecran">Choisissez votre fond d'écran</h3>
         			<form action="accueilvendeur.php" method="post" enctype="multipart/form-data">
-        				<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-
-        				<input type="file" id="Photofond" class="inputcache" name="Photofond" accept="image/png"><br>
-                        <input type="submit" class="imagefile" name="Photofond" value="Choisir un fond">
-
+        				
+        				<input type="text" name="Photofond" ><br>
+                        <input type="submit" class="imagefile" name="fond" value="Choisir un fond">
         			</form>
 
         		</div>
 
-        		<div class="col-lg-6 col-md-6 col-sm-12" align="center">
+        		<div class="col-lg-6 col-md-6 col-sm-12 accueilvend" align="center">
         			<h3 class="fondecran">Importez votre photo de profil</h3>
         			<form action="accueilvendeur.php" method="post" enctype="multipart/form-data">
-        				<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-        				<input type="file" name="Photoprofil" id="Photoprofil" class="inputcache"  accept="image/png"><br>
-                        <input type="submit" class="imagefile" name="Photoprofil" value="Choisir une photo">
-
+        				<input type="text" name="Photoprofil"><br>
+                        <input type="submit" class="imagefile" name="profil" value="Choisir une photo">
         			</form>
         		</div>
         	</div>
