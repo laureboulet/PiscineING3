@@ -6,7 +6,7 @@
 	 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link href="loginacheteur.css" rel="stylesheet" type="text/css"/>
+    <link href="acheteurlogin.css" rel="stylesheet" type="text/css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
@@ -20,9 +20,9 @@
 
       <div class="collapse navbar-collapse" id="main-navigation">
           <ul class="navbar-nav">
-              <li class="nav-item"><a class="nav-link" href="loginvendeur.html"><strong>Login vendeur</strong></a></li>
+              <li class="nav-item"><a class="nav-link" href="loginvendeur.php"><strong>Login vendeur</strong></a></li>
               <li class="nav-item"><a class="nav-link" href="#"><strong>Login acheteur</strong></a></li>
-              <li class="nav-item"><a class="nav-link" href="loginadmin.html"><strong>Login administrateur</strong></a></li>
+              <li class="nav-item"><a class="nav-link" href="loginadmin.php"><strong>Login administrateur</strong></a></li>
           </ul>
       </div>
   </nav>
@@ -81,9 +81,9 @@
   <!-- pied de page -->
     <footer class="page-footer text-center"> 
     <div id="nav">
-            <a class="link" href="loginvendeur.html">Login vendeur |</a>
+            <a class="link" href="loginvendeur.php">Login vendeur |</a>
             <a class="link" href="#">Login acheteur |</a>
-            <a class="link" href="loginadmin.html">Login administrateur |</a>
+            <a class="link" href="loginadmin.php">Login administrateur |</a>
         </div>
         <br>
     <div class="container">

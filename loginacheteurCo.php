@@ -10,7 +10,7 @@ $mdp = isset($_POST["Mdpach"]) ? $_POST["Mdpach"] : "";
 //Identification de la BDD
 $database = "piscineweb";
 //Connexion à la BDD
-$db_handle = mysqli_connect('localhost', 'root', '');
+$db_handle = mysqli_connect('localhost', 'root', 'root');
 $db_found = mysqli_select_db($db_handle, $database);
 
 if($_POST["button1"]){
@@ -153,6 +153,7 @@ if($_POST["button1"]){
                         }
        					$_SESSION['date_expiration']=$stack['Date_expiration'];
        					$_SESSION['numerocb']=$stack['Numero'];
+       					$_SESSION['solde']=$stack['Solde'];
        					//$_SESSION['crypto']= 'XXX';
        					$_SESSION['typecb']=$stack['Type'];
 				}else{
