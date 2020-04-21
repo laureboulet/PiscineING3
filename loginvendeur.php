@@ -5,30 +5,24 @@ $database = "piscineweb";
 $db_handle = mysqli_connect('localhost', 'root', 'root');
 $db_found = mysqli_select_db($db_handle, $database);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Login Vendeur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
     <!--<link rel="stylesheet" type="text/css" href="stylev2.css">-->
     <link rel="stylesheet" type="text/css" href="loginvendeur.css">
     </style>
-
     <script type="text/javascript">
         $(document).ready(function()
             { $('.header').height($(window).height());
         });
-
- /*       $(function(){
-        	$('#button1').click(function(){
-
-   					$('#pseudo').css('border-color', 'red');
-			});
-   		});
     </script>
 </head>
 
@@ -42,12 +36,22 @@ $db_found = mysqli_select_db($db_handle, $database);
     	<div class="collapse navbar-collapse" id="main-navigation">
         	<ul class="navbar-nav">
           		<li class="nav-item"><a class="nav-link" href="loginvendeur.php"><strong>Login vendeur</strong></a></li>
-          		<li class="nav-item"><a class="nav-link" href="loginachateur.php"><strong>Login acheteur</strong></a></li>
+          		<li class="nav-item"><a class="nav-link" href="loginacheteur.php"><strong>Login acheteur</strong></a></li>
           		<li class="nav-item"><a class="nav-link" href="loginadmin.php"><strong>Login administrateur</strong></a></li>
         	</ul>
     	</div>
 	</nav>
-
+<?php
+    // Démarrage ou restauration de la session
+    session_start();
+    // Réinitialisation du tableau de session
+    // On le vide intégralement
+    $_SESSION = array();
+    // Destruction de la session
+    session_destroy();
+    // Destruction du tableau de session
+    unset($_SESSION);
+  ?>
 	<!--Message de bienvenue + instructions-->
 	<header>
 		<div class="bienvenue">
@@ -56,24 +60,26 @@ $db_found = mysqli_select_db($db_handle, $database);
 		</div>
 
 	</header>
+
 	<!--Connexion ou création de compte vendeur-->
 	<div class="row">
+
 		<div class="col-lg-6 col-md-6 col-sm-12">
 			<h3 class="choixdeco">Se connecter en tant que vendeur</h3>
 			<div align="center">
 			<?php
-			$Pseudovend = isset($_POST["Pseudovend"]) ? $_POST["Pseudovend"] : "";
-			$Emailvend = isset($_POST["Emailvend"]) ? $_POST["Emailvend"] : "";
-			$Mdpvend = isset($_POST["Mdpvend"]) ? $_POST["Mdpvend"] : "";
+			$pseudovend = isset($_POST["pseudo"]) ? $_POST["pseudo"] : "";
+			$emailvend = isset($_POST["email"]) ? $_POST["email"] : "";
+			$mdpvend = isset($_POST["mdp"]) ? $_POST["mdp"] : "";
 			if(isset($_POST["button1"])){
     			if($db_found){
 	        		$sql = "SELECT * FROM vendeur";
-	        		if($Pseudovend != "") {
-			            $sql .= " WHERE Pseudovend LIKE '%$Pseudovend%'";
-			            if($Emailvend != ""){
-			                $sql .= " AND Emailvend LIKE '%$Emailvend%'";
-			                if($Mdpvend != ""){
-			                    $sql .= " AND Mdpvend LIKE '%$Mdpvend%'";
+	        		if($pseudovend != "") {
+			            $sql .= " WHERE Pseudovend LIKE '%$pseudovend%'";
+			            if($emailvend != ""){
+			                $sql .= " AND Emailvend LIKE '%$emailvend%'";
+			                if($mdpvend != ""){
+			                    $sql .= " AND Mdpvend LIKE '%$mdpvend%'";
 			                }
 			            }
 	        		}
@@ -83,40 +89,26 @@ $db_found = mysqli_select_db($db_handle, $database);
 			        }
 	        		else{
 	            		while($data = mysqli_fetch_assoc($result)){
-	                	// Démarage d'une session
-	            		session_start();
-              			$_SESSION['Pseudovend']=$Pseudovend;
-               			
-               			//$_SESSION['Emailvend'] = '$Emailvend';
-
-
-               	//ID
-               	/*$recupId = "SELECT Idvend FROM vendeur WHERE Emailvend= '$Emailvend' AND Mdpvend='$Mdpvend'";
-               	$result3 = mysqli_query($db_handle,$recupId);
-               	$row = mysqli_fetch_array($result3);
-               	$Idvend = $row['Idvend'];
-               	$_SESSION['Idvend']=$Idvend;
-               	//Pseudo
-				/*$recupPseudo = "SELECT Pseudovend FROM vendeur WHERE Emailvend='$Emailvend' AND Mdpvend='$Mdpvend'";
-               	$result12 = mysqli_query($db_handle,$recupPseudo);
-               	$row = mysqli_fetch_array($result12);
-               	$Pseudovend = $row['Pseudovend'];
-               	$_SESSION['Pseudovend']=$Pseudovend;*/
-               	//
-               	$recupall = "SELECT * FROM vendeur WHERE Emailvend = '$Emailvend'";
-               	if($result=mysqli_query($db_handle,$recupall)){
-               	$stack = array();
-               	while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-               	$stack = ($row);
-               	}
-               	}
-               	$_SESSION['Pseudovend']=$stack['Pseudovend'];
-               	$_SESSION['Idvend'] = $stack['Idvend'];
-               	
-               header('Location:accueilvendeur.php');
-
-		                exit();
-	            		}
+			                //on récupère la clé primaire de vendeur 
+			                $recupId = "SELECT Idvend FROM vendeur WHERE Emailvend='$emailvend' AND Mdpvend='$mdpvend'";
+		                	session_start();
+		                	$result2 = mysqli_query($db_handle,$recupId);
+		                	$row = mysqli_fetch_array($result2);
+		                	$id = $row['Idvend'];
+		                	$_SESSION['idvend']=$id;
+		                	$recupAll="SELECT * FROM vendeur WHERE Idivend=$id";
+							if($result=mysqli_query($db_handle, $recupAll)){
+		                        $stack = array();
+		                        while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+		                        		$stack = ($row);      
+		                        }
+		       					$_SESSION['pseudovend']=$stack['Pseudovend'];
+		       					$_SESSION['photoprofil']=$stack['Photoprofil'];
+		       					$_SESSION['photofond']=$stack['Photofond'];
+				                //exit();
+		            		}
+		            		header('Location:accueilvendeur.php');
+		            	}
 	        		}
     			}           
 				else{
@@ -131,7 +123,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 					</tr>
 
 					<tr>
-						<td><input required="required" type="text" name="Pseudovend" id ="pseudo" class="login-vendeur"></td>
+						<td><input required="required" type="text" name="pseudo" id ="pseudo" class="login-vendeur"></td>
 					</tr>
 
 					<tr>
@@ -139,7 +131,7 @@ $db_found = mysqli_select_db($db_handle, $database);
 					</tr>
 
 					<tr>
-						<td><input required="required" type="email" name="Emailvend" id ="mail"class="login-vendeur"></td>
+						<td><input required="required" type="email" name="email" id ="mail"class="login-vendeur"></td>
 					</tr>
 
 					<tr>
@@ -151,11 +143,8 @@ $db_found = mysqli_select_db($db_handle, $database);
 					</tr>
 
 					<tr>
-
 						<td colspan="2" align="center"><input type="submit" name="button1" id="button1" value="Se connecter" /></td>
-
-				</tr>
-
+					</tr>
 				</table>
     		</form>
     		</div>
@@ -171,42 +160,50 @@ $db_found = mysqli_select_db($db_handle, $database);
 			$mdp = isset($_POST["Mdpvend"]) ? $_POST["Mdpvend"] : "";
 			if($_POST["button2"]){
 			    if($db_found){
-				$sql = "SELECT * FROM vendeur";
-				if($pseudo != "") {
-				    $sql .= " WHERE Pseudovend LIKE '%$pseudo%'";
-				    if($mail != ""){
-					$sql .= " AND Emailvend LIKE '%$mail%'";
-					if($mdp != ""){
-					    $sql .= " AND Mdpvend LIKE '%$mdp%'";
-					}
+			        $sql = "SELECT * FROM vendeur";
+			        if($pseudo != "") {
+			            $sql .= " WHERE Pseudovend LIKE '%$pseudo%'";
+			            if($mail != ""){
+			                $sql .= " AND Emailvend LIKE '%$mail%'";
+			                if($mdp != ""){
+			                    $sql .= " AND Mdpvend LIKE '%$mdp%'";
+			                }
+			            }
+			        }
+			        $result = mysqli_query($db_handle, $sql);
+				    if (mysqli_num_rows($result) != 0){
+				    echo "Vous avez déjà créé un compte. Connectez-vous directement sur notre site !";
 				    }
-				}	
-				$result = mysqli_query($db_handle, $sql);
-			    	if (mysqli_num_rows($result) != 0){
-					echo "Vous avez déjà créé un compte. Connectez-vous directement sur notre site !";
-				}
-			    	else{
-					$sql = "INSERT INTO vendeur(Nomvend, Pseudovend, Emailvend, Mdpvend) VALUES('$nom', '$pseudo', '$mail', '$mdp')";
-					$result = mysqli_query($db_handle, $sql);
-					echo "Félicitations ! Votre compte a été créé !  Veuillez vous connecter";
-			    	}
+				    else{
+				        $sql = "INSERT INTO vendeur(Nomvend, Pseudovend, Emailvend, Mdpvend, Photoprofil, Photofond) VALUES('$nom', '$pseudo', '$mail', '$mdp', 'profil.png', 'profil.png')";
+				        $result = mysqli_query($db_handle, $sql);
+				        session_start(); 
+				        $_SESSION['pseudovend']=$pseudo;
+						$_SESSION['photoprofil']='profil.png';
+						$_SESSION['photofond']='profil.png';
+				        $recupId = "SELECT Idvend FROM vendeur WHERE Emailvend='$emailvend' AND Mdpvend='$mdpvend'";
+	                	$result2 = mysqli_query($db_handle,$recupId);
+	                	$row = mysqli_fetch_array($result2);
+	                	$id = $row['Idvend'];
+	                	$_SESSION['idvend']=$id;
+				        
+				    	echo "Félicitations ! Votre compte a été créé !  Veuillez vous connecter";
+				    	header('Location:accueilvendeur.php');
+				    }
 			    }
 			    else{
-			    echo "Database not found";
+			    	echo "Database not found";
 			    }
 			}
 			?>
 			<form action="loginvendeur.php" method="post" class="vendeur">
     			<table>
-
     				<tr>
 						<td class="champs">Nom</td><br>
 					</tr>
-
 					<tr>
 						<td><input required="required" type="text" name="Nomvend" id="nom" class="login-vendeur"></td>
 					</tr>
-
 						<td class="champs">Pseudo</td><br>
 					</tr>
 
@@ -231,19 +228,17 @@ $db_found = mysqli_select_db($db_handle, $database);
 					</tr>
 
 					<tr>
-
 						<td colspan="2" align="center"><input type="submit" name="button2" value="Créer son compte"/></td>
 					</tr>
 				</table>
     		</form>
     		</div>
-
      	</div>
     </div>
     <footer class="page-footer text-center"> 
 		<div id="nav">
-            <a class="link" href="loginvendeur.html">Login vendeur |</a>
-            <a class="link" href="loginacheteur.html">Login acheteur |</a>
+            <a class="link" href="loginvendeur.php">Login vendeur |</a>
+            <a class="link" href="loginacheteur.php">Login acheteur |</a>
             <a class="link" href="loginadmin.php">Login administrateur |</a>
         </div>
         <br>
