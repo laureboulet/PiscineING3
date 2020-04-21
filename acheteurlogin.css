@@ -1,0 +1,152 @@
+/*Barre de navigation avant login*/
+.navbar { background:#EEF3F1; /*couleur légèrement grise*/
+		}
+
+		.nav-link{
+  			font-size: 15px;
+			color: #7EC6A3; /*couleur bleu canard*/
+			cursor: pointer;
+			text-decoration: underline;
+			margin-right: 5em !important; 
+			margin-left: 10em ;}
+
+		.nav-link:hover {
+    		color: black;
+        }
+
+/* Barre de navigation après login */
+/*.navbar { background:#EEF3F1; /*couleur légèrement grise*/
+		/*}*/
+
+		.nav-link2{
+  			font-size: 15px;
+			color: #7EC6A3; /*couleur bleu canard*/
+			cursor: pointer;
+			text-decoration: underline;
+			margin-right: 3em !important; 
+			margin-left: 4em ;}
+
+		.nav-link2:hover {
+    		color: black;
+        }
+
+/*titre des 2 colonnes*/
+.col-lg-6 {
+	text-align: center; 
+	color: #1F7955;
+	border-right: 2px solid #18AB9C;
+}
+
+h4{
+	text-align: center;
+}
+h5{
+	text-align: center;
+	/*margin: 3em auto;*/
+}
+h6{
+	text-align: center;
+}
+form{
+	/*margin: 4em auto;*/
+	text-align: left;
+	color: black;
+}
+.login-acheteur{
+	border: 1px solid grey;
+	padding:7px;
+	transition: all 0.5s ease;
+}
+.admin input{
+	display: block;
+	margin-bottom: 6px;
+	border-radius: 5px;
+}
+
+.login-acheteur:hover{
+	background-color: #7EC6A3;
+	color:white;
+}
+.coord-acheteur:hover{
+	background-color: #7EC6A3;
+	color:white;
+}
+.admin input[type=button]{
+	background-color: #7EC6A3;
+	padding: 5px; 
+	color: white;
+	transition: all 0.5s ease;
+}
+.admin input[type=button]:hover{
+	background-color: white;
+	color: #7EC6A3;
+	transition: all 0.5s ease;
+}
+
+.admin input[type=submit]{
+	background-color: #7EC6A3;
+	padding: 5px; 
+	color: white;
+	transition: all 0.5s ease;
+}
+.admin input[type=submit]:hover{
+	background-color: white;
+	color: #7EC6A3;
+	transition: all 0.5s ease;
+}
+
+.creation {
+	padding-left: 200px;
+	font-size: 20px;
+}
+
+/*bas de la page*/
+.link{
+	color: #7EC6A3;
+}
+
+.link:hover{
+	color: black;
+}
+.info{
+	color: black;
+}
+.info:hover{
+	color: #7EC6A3;
+}
+
+body, html{height:100%;}
+
+footer{
+	background: #E8EEEC;
+	padding: 10px 0 10px; 
+}
+.baspage{
+	position:absolute;
+	bottom:0;
+	width: 100%;
+}
+
+.btn {
+	color: white;
+	background-color: #7EC6A3;
+	padding: 5px; 
+	/*transition: all 0.5s ease;*/
+} 
+.btn:hover {
+	background-color: white;
+	color: #7EC6A3;
+	/*transition: all 0.5s ease;*/
+}
+/*boutons de la navbar*/
+.item input[type=submit]{
+	background-color: #7EC6A3;
+	padding: 5px; 
+	color: white;
+	transition: all 0.5s ease;
+}
+.item input[type=submit]:hover{
+	background-color: white;
+	color: #7EC6A3;
+	transition: all 0.5s ease;
+}
